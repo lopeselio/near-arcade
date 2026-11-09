@@ -105,7 +105,7 @@
       const tags = el('div', { className: 'tags' }, ...g.tags.map((t) => el('b', { textContent: t })));
       const row = el('div', { className: 'row' },
         el('button', { className: 'btn go', textContent: 'Play', onclick: () => play(g) }),
-        el('a', { className: 'btn', textContent: 'New tab', href: g.url, target: '_blank', rel: 'noopener' }),
+        el('a', { className: 'btn', textContent: 'Open', href: g.url, target: '_blank', rel: 'noopener' }),
         el('a', { className: 'btn', textContent: 'Code', href: g.repo, target: '_blank', rel: 'noopener' }));
       cab.append(marquee, el('div', { className: 'body' }, el('p', { textContent: g.blurb }), tags, row));
       box.append(cab);
