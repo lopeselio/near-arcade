@@ -13,4 +13,5 @@ fi
 KEY=$(az storage account keys list -g "$RG" -n "$SA" --query '[0].value' -o tsv)
 az storage blob service-properties update --account-name "$SA" --account-key "$KEY" --static-website --index-document index.html --404-document index.html -o none
 az storage blob upload --account-name "$SA" --account-key "$KEY" -c '$web' -f index.html -n index.html --content-type 'text/html; charset=utf-8' --content-cache-control 'no-cache' --overwrite -o none
+az storage blob upload-batch --account-name "$SA" --account-key "$KEY" -d '$web/thumbs' -s thumbs --content-type image/webp --content-cache-control 'public, max-age=86400' --overwrite -o none
 az storage account show -g "$RG" -n "$SA" --query primaryEndpoints.web -o tsv
