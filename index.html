@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NEAR Arcade</title>
+  <meta name="description" content="Four browser games on NEAR testnet: AI agents with wallets, sealed moves, NFTs that hold money." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23120d1c'/%3E%3Cpath d='M20 40V24l12 10 12-10v16' stroke='%2300ec97' stroke-width='6' fill='none' stroke-linejoin='round'/%3E%3C/svg%3E" />
+  <style>
+    :root { --bg: #0c0915; --ink: #f4efff; --dim: #a99cc4; --line: rgba(255,255,255,.1); --near: #00ec97; --card: #171126; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; background: var(--bg); color: var(--ink); font-family: Inter, system-ui, sans-serif; }
+    body { min-height: 100vh; background:
+      radial-gradient(1200px 500px at 50% -10%, rgba(0,236,151,.14), transparent 60%),
+      repeating-linear-gradient(0deg, rgba(255,255,255,.025) 0 1px, transparent 1px 4px), var(--bg); }
+    header { text-align: center; padding: 56px 16px 24px; }
+    h1 { font-family: 'Press Start 2P', monospace; font-weight: 400; font-size: clamp(26px, 6vw, 54px); margin: 0; letter-spacing: 2px;
+      color: #fff; text-shadow: 0 0 18px rgba(0,236,151,.7), 4px 4px 0 #6b2fd6; }
+    header p { color: var(--dim); max-width: 640px; margin: 18px auto 0; line-height: 1.6; }
+    .coin { display: inline-block; margin-top: 18px; font: 11px 'Press Start 2P', monospace; color: var(--near); animation: blink 1.2s steps(2) infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+    main { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 20px; max-width: 1180px; margin: 0 auto; padding: 16px 16px 60px; }
+    .cab { background: var(--card); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; display: flex; flex-direction: column;
+      box-shadow: 0 0 0 1px rgba(0,0,0,.4), 0 20px 50px rgba(0,0,0,.45); transition: transform .2s, box-shadow .2s; }
+    .cab:hover { transform: translateY(-4px); box-shadow: 0 0 0 1px var(--glow), 0 24px 60px rgba(0,0,0,.5), 0 0 40px color-mix(in srgb, var(--glow) 35%, transparent); }
+    .marquee { height: 130px; display: grid; place-items: center; background: linear-gradient(160deg, color-mix(in srgb, var(--glow) 45%, #120d1c), #120d1c 75%); position: relative; }
+    .marquee span { font-family: 'Press Start 2P', monospace; font-size: 15px; text-align: center; line-height: 1.6; padding: 0 12px; color: #fff; text-shadow: 0 0 12px var(--glow), 2px 2px 0 rgba(0,0,0,.6); }
+    .marquee i { position: absolute; top: 10px; right: 12px; font-style: normal; font-size: 11px; color: rgba(255,255,255,.7); }
+    .body { padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+    .body p { margin: 0; color: var(--dim); font-size: 14px; line-height: 1.55; flex: 1; }
+    .tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .tags b { font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 99px; border: 1px solid var(--line); color: var(--ink); background: rgba(255,255,255,.04); }
+    .row { display: flex; gap: 8px; }
+    .btn { flex: 1; text-align: center; font: 700 14px Inter, sans-serif; padding: 11px 12px; border-radius: 11px; cursor: pointer; text-decoration: none; border: 1px solid var(--line); color: var(--ink); background: rgba(255,255,255,.05); }
+    .btn.go { background: var(--glow); color: #0c0915; border: 0; }
+    .btn:hover { filter: brightness(1.1); }
+    footer { text-align: center; color: var(--dim); font-size: 12px; padding: 0 16px 40px; }
+    footer a { color: var(--near); }
+    #screen { position: fixed; inset: 0; background: #000; display: none; flex-direction: column; z-index: 10; }
+    #screen.on { display: flex; }
+    #screen nav { display: flex; gap: 10px; align-items: center; padding: 8px 12px; background: #120d1c; border-bottom: 1px solid var(--line); font-size: 13px; }
+    #screen nav b { font-family: 'Press Start 2P', monospace; font-size: 11px; flex: 1; }
+    #screen nav a, #screen nav button { color: var(--ink); background: rgba(255,255,255,.08); border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px; font: 600 12px Inter; cursor: pointer; text-decoration: none; }
+    #screen iframe { flex: 1; border: 0; width: 100%; }
+    @media (max-width: 600px) { header { padding-top: 36px; } #screen nav small { display: none; } }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>NEAR ARCADE</h1>
+    <p>Four browser games on NEAR testnet. Rivals are AI agents with their own wallets, hidden moves are sealed onchain and opened later, and the chain stays out of your way. Play as a guest, or sign in with a NEAR wallet.</p>
+    <div class="coin">INSERT COIN</div>
+  </header>
+  <main id="games"></main>
+  <footer>Each game is its own project with its own repo, contract and server; this page only links to them. Testnet only.</footer>
+  <div id="screen" role="dialog" aria-modal="true" aria-label="Game">
+    <nav><b id="screenTitle"></b><small>Wallet sign-in works best in a full tab →</small><a id="screenOpen" target="_blank" rel="noopener">Open full tab</a><button id="screenClose">Back to arcade</button></nav>
+    <iframe id="screenFrame" title="Game" allow="fullscreen; clipboard-write; autoplay" allowfullscreen></iframe>
+  </div>
+  <script>
+    const GAMES = [
+      { title: 'Sushi Sabotage', glow: '#ff6a3c', badge: '1–4 players',
+        url: 'https://sushi-sabotage.happyflower-1d86c59e.northeurope.azurecontainerapps.io/',
+        repo: 'https://github.com/lopeselio/sushi-sabotage',
+        blurb: 'A three-minute sushi kitchen race. Wreck rivals’ dishes in secret; the sabotage log is sealed onchain and opened when the shift ends. AI chefs with wallets, chef NFTs that hold their own money.',
+        tags: ['Games', 'Private AI', 'Agents', 'NFTs'] },
+      { title: 'Bazaar of Liars', glow: '#ffc53d', badge: 'solo',
+        url: 'https://bazaar-liars.delightfulwave-c85acb1b.northeurope.azurecontainerapps.io/',
+        repo: 'https://github.com/lopeselio/bazaar-of-liars',
+        blurb: 'A trading game against AI merchants who bluff. Read their tells, call their lies, buy low and sell high, and the chain proves every bluff was fair.',
+        tags: ['Games', 'Private AI', 'Agents'] },
+      { title: 'Realm Ledger', glow: '#7c8cff', badge: 'turn-based',
+        url: 'https://realm-ledger.vercel.app/',
+        repo: 'https://github.com/lopeselio/realm-ledger',
+        blurb: 'Conquest on a living war table. Rival realms are ruled by AI agents with wallets and private minds; every season all rulers seal their orders at once.',
+        tags: ['Games', 'Private AI', 'Agents'] },
+      { title: 'Parkwright', glow: '#3ee0b0', badge: 'builder',
+        url: 'https://parkwright.whitemeadow-d4da3d5d.northeurope.azurecontainerapps.io/',
+        repo: 'https://github.com/lopeselio/parkwright',
+        blurb: 'Build paths, rides, coasters and stalls; simulated guests with their own NEAR wallets decide whether your park is worth their money.',
+        tags: ['Games', 'Agents'] },
+    ];
+    const el = (tag, props = {}, ...kids) => { const e = Object.assign(document.createElement(tag), props); e.append(...kids); return e; };
+    const screen = document.getElementById('screen');
+    const frame = document.getElementById('screenFrame');
+    function play(g) {
+      document.getElementById('screenTitle').textContent = g.title;
+      document.getElementById('screenOpen').href = g.url;
+      frame.src = g.url;
+      screen.classList.add('on');
+      history.pushState({ g: g.title }, '', `#${encodeURIComponent(g.title.toLowerCase().replace(/ /g, '-'))}`);
+    }
+    function close() { screen.classList.remove('on'); frame.src = 'about:blank'; }
+    document.getElementById('screenClose').onclick = () => history.back();
+    window.addEventListener('popstate', () => { if (!location.hash) close(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && screen.classList.contains('on')) history.back(); });
+    const box = document.getElementById('games');
+    for (const g of GAMES) {
+      const cab = el('article', { className: 'cab' });
+      cab.style.setProperty('--glow', g.glow);
+      const marquee = el('div', { className: 'marquee' }, el('span', { textContent: g.title.toUpperCase() }), el('i', { textContent: g.badge }));
+      const tags = el('div', { className: 'tags' }, ...g.tags.map((t) => el('b', { textContent: t })));
+      const row = el('div', { className: 'row' },
+        el('button', { className: 'btn go', textContent: 'Play', onclick: () => play(g) }),
+        el('a', { className: 'btn', textContent: 'New tab', href: g.url, target: '_blank', rel: 'noopener' }),
+        el('a', { className: 'btn', textContent: 'Code', href: g.repo, target: '_blank', rel: 'noopener' }));
+      cab.append(marquee, el('div', { className: 'body' }, el('p', { textContent: g.blurb }), tags, row));
+      box.append(cab);
+    }
+    const start = GAMES.find((g) => `#${g.title.toLowerCase().replace(/ /g, '-')}` === location.hash);
+    if (start) play(start);
+  </script>
+</body>
+</html>
