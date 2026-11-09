@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>NEAR Arcade</title>
-  <meta name="description" content="Four browser games on NEAR testnet: AI agents with wallets, sealed moves, NFTs that hold money." />
+  <meta name="description" content="Five browser games on NEAR testnet: AI agents with wallets, sealed moves, NFTs that hold money." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
@@ -51,7 +51,7 @@
 <body>
   <header>
     <h1>NEAR ARCADE</h1>
-    <p>Four browser games on NEAR testnet. Rivals are AI agents with their own wallets, hidden moves are sealed onchain and opened later, and the chain stays out of your way. Play as a guest, or sign in with a NEAR wallet.</p>
+    <p>Five browser games on NEAR testnet. Rivals are AI agents with their own wallets, hidden moves are sealed onchain and opened later, and the chain stays out of your way. Play as a guest, or sign in with a NEAR wallet.</p>
     <div class="coin">INSERT COIN</div>
   </header>
   <main id="games"></main>
@@ -82,6 +82,11 @@
         repo: 'https://github.com/lopeselio/parkwright',
         blurb: 'Build paths, rides, coasters and stalls; simulated guests with their own NEAR wallets decide whether your park is worth their money.',
         tags: ['Games', 'Agents'] },
+      { title: 'Fogwater', slug: 'fogwater', glow: '#5aa8ff', badge: '1v1 · AI or friend',
+        url: 'https://fogwater.lopeselio.online/',
+        repo: 'https://github.com/lopeselio/fogwater',
+        blurb: 'A night sea battle in voxels. Your fleet is sealed onchain as a Merkle root; every hit or miss is proven against it, and nobody sees your ships until the last one sinks. Play an AI admiral or send a friend a link.',
+        tags: ['Games', 'Privacy', 'Private AI'] },
     ];
     const el = (tag, props = {}, ...kids) => { const e = Object.assign(document.createElement(tag), props); e.append(...kids); return e; };
     const screen = document.getElementById('screen');

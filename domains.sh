@@ -10,6 +10,7 @@
 #   sushi.lopeselio.online       -> Sushi Sabotage   (Azure Container Apps, RG sushi-sabotage)
 #   bazaar.lopeselio.online      -> Bazaar of Liars  (Azure Container Apps, RG bazaar-liars)
 #   parkwright.lopeselio.online  -> Parkwright       (Azure Container Apps, RG parkwright)
+#   fogwater.lopeselio.online    -> Fogwater         (Azure Container Apps, RG fogwater)
 #   realm.lopeselio.online       -> Realm Ledger     (Vercel project realm-ledger)
 #
 # The root domain and www stay on the personal site; email forwarding records are untouched.
@@ -20,7 +21,7 @@ SCOPE=${VERCEL_SCOPE:-lopeselios-projects}
 cd "$(dirname "$0")"
 
 # sub | resource group | container app
-ACA=("sushi sushi-sabotage sushi-sabotage" "bazaar bazaar-liars bazaar-liars" "parkwright parkwright parkwright")
+ACA=("sushi sushi-sabotage sushi-sabotage" "bazaar bazaar-liars bazaar-liars" "parkwright parkwright parkwright" "fogwater fogwater fogwater")
 # sub | vercel project
 VERCEL=("arcade near-arcade" "realm realm-ledger")
 
@@ -71,6 +72,7 @@ bind() {
   echo "== wallet sign-in URLs"
   az containerapp update -g bazaar-liars -n bazaar-liars --set-env-vars "BETTER_AUTH_URL=https://bazaar.$DOMAIN" -o none
   az containerapp update -g sushi-sabotage -n sushi-sabotage --set-env-vars "BETTER_AUTH_URL=https://sushi.$DOMAIN" -o none
+  az containerapp update -g fogwater -n fogwater --set-env-vars "BETTER_AUTH_URL=https://fogwater.$DOMAIN" -o none
 
   # the arcade links to the subdomains from now on
   echo "== arcade links"
@@ -82,7 +84,7 @@ bind() {
   rm -f index.html.bak
   vercel deploy --prod --yes --scope "$SCOPE" >/dev/null
   echo
-  for sub in arcade sushi bazaar parkwright realm; do
+  for sub in arcade sushi bazaar parkwright realm fogwater; do
     printf "%-28s %s\n" "https://$sub.$DOMAIN/" "$(curl -s -o /dev/null -w '%{http_code}' "https://$sub.$DOMAIN/" || true)"
   done
 }
