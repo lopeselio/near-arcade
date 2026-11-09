@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>NEAR Arcade</title>
-  <meta name="description" content="Six browser games on NEAR testnet: AI agents with wallets, sealed moves, NFTs that hold money. High scores and game accounts read live from the chain." />
+  <meta name="description" content="Seven browser games on NEAR testnet: AI agents with wallets, sealed moves, NFTs that hold money. High scores and game accounts read live from the chain." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Monoton&family=Chakra+Petch:wght@400;500;600;700&family=VT323&display=swap" rel="stylesheet" />
@@ -158,7 +158,7 @@
     <header class="sign">
       <div class="bulbs" aria-hidden="true"></div>
       <h1>NEAR <span>Arcade</span></h1>
-      <p>Six browser games on NEAR testnet. Your rivals are AI agents with their own wallets, hidden moves are sealed onchain and opened later, and every score below is read live from the chain. Play as a guest, or sign in with a NEAR wallet.</p>
+      <p>Seven browser games on NEAR testnet. Your rivals are AI agents with their own wallets, hidden moves are sealed onchain and opened later, and every score below is read live from the chain. Play as a guest, or sign in with a NEAR wallet.</p>
     </header>
     <section class="ticker" aria-label="Live numbers from NEAR testnet"><ul id="ticker"><li>Reading the chain…</li></ul><button id="tickerPause" class="pause" aria-pressed="false">Pause</button></section>
 
@@ -211,6 +211,10 @@
         url: 'https://emberfall.lopeselio.online/', repo: 'https://github.com/lopeselio/emberfall',
         blurb: 'You see only what your torch lights while the dark closes in. Every Warden is an NFT carrying its own EMBER purse; EMBER burns for the fallen and mints only for embers carried out.',
         accounts: [['emberfall.testnet', 'Game contract', true], ['emberfall-ref.testnet', 'Referee'], ['emberfall-relay.testnet', 'Relay'], ['brannoc.emberfall.testnet', 'AI Warden']] },
+      { title: 'Inside Job', slug: 'inside-job', glow: '#5b8cff', badge: 'social deduction, 5 seats', thumb: '/thumbs/inside-job.webp',
+        url: 'https://inside-job.lopeselio.online/', repo: 'https://github.com/lopeselio/inside-job',
+        blurb: 'Five council members run a DAO treasury through the night; one is secretly draining it. Every spend is a real Sputnik DAO proposal, roles and votes are sealed onchain, and the AI council can vote but never move money.',
+        accounts: [['inside-job.testnet', 'Game contract', true], ['dao.inside-job.testnet', 'Treasury (Sputnik DAO)'], ['inside-job-ref.testnet', 'Referee'], ['seat1.inside-job.testnet', 'AI council desk']] },
     ];
     const ARCADE_REPO = 'https://github.com/lopeselio/near-arcade';
 
@@ -308,6 +312,13 @@
         return { title: 'Wardens’ ledger', rows: rows.map((r) => [r.name, `${r.wins}W · ${fmt(r.embers_out)} out`]), empty: 'No settled match yet. Carry an ember out of the dark to be first.',
           stats: [[fmt(Number(sup.total_supply)), 'EMBER in existence'], [fmt(Number(sup.burned)), 'lost to the dark'], [fmt(sup.matches_settled), 'matches settled']],
           ticker: [`<b>${fmt(Number(sup.burned))}</b> EMBER burned for fallen Wardens in Emberfall`] };
+      },
+      async 'inside-job'() {
+        const [info, props, rows] = await Promise.all([view('inside-job.testnet', 'info', {}), view('dao.inside-job.testnet', 'get_last_proposal_id', {}), view('inside-job.testnet', 'leaderboard', { limit: 5 })]);
+        return { title: 'Ranked councillors', rows: rows.map(([id, s]) => [who(id), `${s.wins}W ${s.losses}L · ${s.caught} caught`]),
+          empty: 'No ranked shifts yet. Sign in with NEAR and catch the Insider to be first.',
+          stats: [[fmt(info.played), 'night shifts'], [fmt(props), 'DAO proposals voted'], ['3 of 5', 'votes to pass a spend']],
+          ticker: [`<b>${fmt(props)}</b> treasury proposals voted on the Inside Job DAO`] };
       },
     };
 

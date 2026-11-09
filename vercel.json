@@ -1,5 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "rewrites": [{ "source": "/:game(sushi|bazaar|realm|parkwright|fogwater|emberfall)", "destination": "/index.html" }],
+  "rewrites": [{ "source": "/:game(sushi|bazaar|realm|parkwright|fogwater|emberfall|inside-job)", "destination": "/index.html" }],
   "headers": [{ "source": "/(.*)", "headers": [{ "key": "Cache-Control", "value": "no-cache" }] }]
 }
