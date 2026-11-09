@@ -207,6 +207,10 @@
         url: 'https://fogwater.lopeselio.online/', repo: 'https://github.com/lopeselio/fogwater',
         blurb: 'A night sea battle in voxels. Your fleet is sealed onchain as a Merkle root; every hit or miss is proven against it until the last ship sinks.',
         accounts: [['fogwater.testnet', 'Game contract', true], ['fogwater-ref.testnet', 'Referee'], ['fogwater-relay.testnet', 'Relay']] },
+      { title: 'Emberfall', slug: 'emberfall', glow: '#ff9a3c', badge: 'torchlit arena, up to 6', thumb: '/thumbs/emberfall.webp',
+        url: 'https://emberfall.lopeselio.online/', repo: 'https://github.com/lopeselio/emberfall',
+        blurb: 'You see only what your torch lights while the dark closes in. Every Warden is an NFT carrying its own EMBER purse; EMBER burns for the fallen and mints only for embers carried out.',
+        accounts: [['emberfall.testnet', 'Game contract', true], ['emberfall-ref.testnet', 'Referee'], ['emberfall-relay.testnet', 'Relay'], ['brannoc.emberfall.testnet', 'AI Warden']] },
     ];
     const ARCADE_REPO = 'https://github.com/lopeselio/near-arcade';
 
@@ -298,6 +302,12 @@
         return { title: 'Admirals’ ledger', rows: rows.map(([id, s]) => [who(id), `${s.wins}W ${s.losses}L`]), empty: 'No ranked wins yet. Sign in and sink a fleet to be first.',
           stats: [[fmt(rows.length), 'ranked captains'], [fmt(games), 'ranked games'], [fmt(sunk), 'ships sunk']],
           ticker: rows.length ? [`<b>${fmt(sunk)}</b> ships sunk in Fogwater`] : [] };
+      },
+      async emberfall() {
+        const [rows, sup] = await Promise.all([view('emberfall.testnet', 'leaderboard', { limit: 5 }), view('emberfall.testnet', 'ember_supply', {})]);
+        return { title: 'Wardens’ ledger', rows: rows.map((r) => [r.name, `${r.wins}W · ${fmt(r.embers_out)} out`]), empty: 'No settled match yet. Carry an ember out of the dark to be first.',
+          stats: [[fmt(Number(sup.total_supply)), 'EMBER in existence'], [fmt(Number(sup.burned)), 'lost to the dark'], [fmt(sup.matches_settled), 'matches settled']],
+          ticker: [`<b>${fmt(Number(sup.burned))}</b> EMBER burned for fallen Wardens in Emberfall`] };
       },
     };
 
