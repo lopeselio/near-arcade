@@ -62,22 +62,22 @@
   </div>
   <script>
     const GAMES = [
-      { title: 'Sushi Sabotage', glow: '#ff6a3c', badge: '1–4 players',
+      { title: 'Sushi Sabotage', slug: 'sushi', glow: '#ff6a3c', badge: '1–4 players',
         url: 'https://sushi-sabotage.happyflower-1d86c59e.northeurope.azurecontainerapps.io/',
         repo: 'https://github.com/lopeselio/sushi-sabotage',
         blurb: 'A three-minute sushi kitchen race. Wreck rivals’ dishes in secret; the sabotage log is sealed onchain and opened when the shift ends. AI chefs with wallets, chef NFTs that hold their own money.',
         tags: ['Games', 'Private AI', 'Agents', 'NFTs'] },
-      { title: 'Bazaar of Liars', glow: '#ffc53d', badge: 'solo',
+      { title: 'Bazaar of Liars', slug: 'bazaar', glow: '#ffc53d', badge: 'solo',
         url: 'https://bazaar-liars.delightfulwave-c85acb1b.northeurope.azurecontainerapps.io/',
         repo: 'https://github.com/lopeselio/bazaar-of-liars',
         blurb: 'A trading game against AI merchants who bluff. Read their tells, call their lies, buy low and sell high, and the chain proves every bluff was fair.',
         tags: ['Games', 'Private AI', 'Agents'] },
-      { title: 'Realm Ledger', glow: '#7c8cff', badge: 'turn-based',
+      { title: 'Realm Ledger', slug: 'realm', glow: '#7c8cff', badge: 'turn-based',
         url: 'https://realm-ledger.vercel.app/',
         repo: 'https://github.com/lopeselio/realm-ledger',
         blurb: 'Conquest on a living war table. Rival realms are ruled by AI agents with wallets and private minds; every season all rulers seal their orders at once.',
         tags: ['Games', 'Private AI', 'Agents'] },
-      { title: 'Parkwright', glow: '#3ee0b0', badge: 'builder',
+      { title: 'Parkwright', slug: 'parkwright', glow: '#3ee0b0', badge: 'builder',
         url: 'https://parkwright.whitemeadow-d4da3d5d.northeurope.azurecontainerapps.io/',
         repo: 'https://github.com/lopeselio/parkwright',
         blurb: 'Build paths, rides, coasters and stalls; simulated guests with their own NEAR wallets decide whether your park is worth their money.',
@@ -86,17 +86,20 @@
     const el = (tag, props = {}, ...kids) => { const e = Object.assign(document.createElement(tag), props); e.append(...kids); return e; };
     const screen = document.getElementById('screen');
     const frame = document.getElementById('screenFrame');
-    function play(g) {
+    // every game opens inside this page, at its own path (/sushi, /bazaar, …), so a link to it stays on the arcade
+    function show(g) {
       document.getElementById('screenTitle').textContent = g.title;
       document.getElementById('screenOpen').href = g.url;
-      frame.src = g.url;
+      if (frame.src !== g.url) frame.src = g.url;
       screen.classList.add('on');
-      history.pushState({ g: g.title }, '', `#${encodeURIComponent(g.title.toLowerCase().replace(/ /g, '-'))}`);
+      document.title = `${g.title} · NEAR Arcade`;
     }
-    function close() { screen.classList.remove('on'); frame.src = 'about:blank'; }
-    document.getElementById('screenClose').onclick = () => history.back();
-    window.addEventListener('popstate', () => { if (!location.hash) close(); });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && screen.classList.contains('on')) history.back(); });
+    function play(g) { history.pushState({ slug: g.slug }, '', `/${g.slug}`); show(g); }
+    function close() { screen.classList.remove('on'); frame.src = 'about:blank'; document.title = 'NEAR Arcade'; }
+    const fromPath = () => GAMES.find((g) => location.pathname.replace(/^\/|\/$/g, '') === g.slug || location.hash === `#${g.slug}`);
+    document.getElementById('screenClose').onclick = () => { if (history.state?.slug) history.back(); else { history.replaceState(null, '', '/'); close(); } };
+    window.addEventListener('popstate', () => { const g = fromPath(); if (g) show(g); else close(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && screen.classList.contains('on')) document.getElementById('screenClose').click(); });
     const box = document.getElementById('games');
     for (const g of GAMES) {
       const cab = el('article', { className: 'cab' });
@@ -110,8 +113,8 @@
       cab.append(marquee, el('div', { className: 'body' }, el('p', { textContent: g.blurb }), tags, row));
       box.append(cab);
     }
-    const start = GAMES.find((g) => `#${g.title.toLowerCase().replace(/ /g, '-')}` === location.hash);
-    if (start) play(start);
+    const start = fromPath();
+    if (start) show(start);
   </script>
 </body>
 </html>
