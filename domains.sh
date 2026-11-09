@@ -12,6 +12,7 @@
 #   parkwright.lopeselio.online  -> Parkwright       (Azure Container Apps, RG parkwright)
 #   fogwater.lopeselio.online    -> Fogwater         (Azure Container Apps, RG fogwater)
 #   emberfall.lopeselio.online   -> Emberfall        (Azure Container Apps, RG emberfall)
+#   inside-job.lopeselio.online  -> Inside Job       (Azure Container Apps, RG inside-job)
 #   realm.lopeselio.online       -> Realm Ledger     (Vercel project realm-ledger)
 #
 # The root domain and www stay on the personal site; email forwarding records are untouched.
@@ -22,7 +23,7 @@ SCOPE=${VERCEL_SCOPE:-lopeselios-projects}
 cd "$(dirname "$0")"
 
 # sub | resource group | container app
-ACA=("sushi sushi-sabotage sushi-sabotage" "bazaar bazaar-liars bazaar-liars" "parkwright parkwright parkwright" "fogwater fogwater fogwater" "emberfall emberfall emberfall")
+ACA=("sushi sushi-sabotage sushi-sabotage" "bazaar bazaar-liars bazaar-liars" "parkwright parkwright parkwright" "fogwater fogwater fogwater" "emberfall emberfall emberfall" "inside-job inside-job inside-job")
 # sub | vercel project
 VERCEL=("arcade near-arcade" "realm realm-ledger")
 
@@ -75,6 +76,7 @@ bind() {
   az containerapp update -g sushi-sabotage -n sushi-sabotage --set-env-vars "BETTER_AUTH_URL=https://sushi.$DOMAIN" -o none
   az containerapp update -g fogwater -n fogwater --set-env-vars "BETTER_AUTH_URL=https://fogwater.$DOMAIN" -o none
   az containerapp update -g emberfall -n emberfall --set-env-vars "BETTER_AUTH_URL=https://emberfall.$DOMAIN" -o none
+  az containerapp update -g inside-job -n inside-job --set-env-vars "BETTER_AUTH_URL=https://inside-job.$DOMAIN" -o none
 
   # the arcade links to the subdomains from now on
   echo "== arcade links"
@@ -86,7 +88,7 @@ bind() {
   rm -f index.html.bak
   vercel deploy --prod --yes --scope "$SCOPE" >/dev/null
   echo
-  for sub in arcade sushi bazaar parkwright realm fogwater emberfall; do
+  for sub in arcade sushi bazaar parkwright realm fogwater emberfall inside-job; do
     printf "%-28s %s\n" "https://$sub.$DOMAIN/" "$(curl -s -o /dev/null -w '%{http_code}' "https://$sub.$DOMAIN/" || true)"
   done
 }
