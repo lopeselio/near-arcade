@@ -48,11 +48,14 @@
       background: radial-gradient(circle, transparent 1.2px, rgba(0, 0, 0, .55) 1.6px) 0 0 / 4px 4px; }
     .ticker ul { display: flex; gap: 48px; margin: 0; padding: 8px 0 8px 24px; list-style: none; width: max-content; animation: scroll 60s linear infinite;
       font: 30px/1 'VT323', monospace; color: var(--led); text-shadow: 0 0 8px rgba(255, 75, 58, .8); white-space: nowrap; }
+    .ticker.paused ul { animation-play-state: paused; }
+    .pause { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); z-index: 2; font: 600 12px 'Chakra Petch', sans-serif; color: var(--ink);
+      background: rgba(20, 10, 36, .92); border: 1px solid var(--line); border-radius: 6px; padding: 4px 8px; cursor: pointer; }
     .ticker li b { color: var(--amber); font-weight: 400; text-shadow: 0 0 8px rgba(255, 199, 90, .8); }
     @keyframes scroll { to { transform: translateX(-50%); } }
 
     /* ── the floor: one cabinet per game ─────────────────────── */
-    .floor { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 360px)); justify-content: center; gap: 30px 26px; margin: 46px 0 0; }
+    .floor { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(290px, 100%), 360px)); justify-content: center; gap: 30px 26px; margin: 46px 0 0; }
     .cab { --glow: var(--cyan); position: relative; display: flex; flex-direction: column; border-radius: 20px 20px 10px 10px;
       background: linear-gradient(90deg, #120a22, var(--lacquer) 12%, var(--lacquer-hi) 50%, var(--lacquer) 88%, #120a22);
       box-shadow: inset 0 0 0 2px #2d1c4f, 0 26px 50px rgba(0, 0, 0, .55), 0 0 0 1px rgba(0, 0, 0, .6); }
@@ -63,6 +66,8 @@
       box-shadow: inset 0 0 0 2px rgba(255, 255, 255, .25), 0 0 28px color-mix(in srgb, var(--glow) 55%, transparent); }
     .marquee h2 { margin: 0; font: 700 22px/1.1 'Chakra Petch', sans-serif; letter-spacing: .04em; color: #fff;
       text-shadow: 0 2px 0 rgba(0, 0, 0, .45), 0 0 16px rgba(255, 255, 255, .5); }
+    .cab.light .marquee h2 { color: #1a0f2b; text-shadow: 0 1px 0 rgba(255, 255, 255, .45); }
+    .cab.light .marquee small { color: #2a1a40; }
     .marquee small { display: block; margin-top: 2px; font-size: 12.5px; font-weight: 600; color: rgba(255, 255, 255, .88); }
     .bezel { margin: 10px 10px 0; padding: 12px; border-radius: 12px; background: #07040d; box-shadow: inset 0 0 0 2px #241640, inset 0 0 24px rgba(0, 0, 0, .9); }
     .crt { position: relative; aspect-ratio: 16 / 10; border-radius: 14px / 18px; overflow: hidden; background: #000;
@@ -73,6 +78,7 @@
     .crt::after { /* curved glass: vignette + glare */ content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 2;
       background: radial-gradient(120% 90% at 50% 50%, transparent 58%, rgba(0, 0, 0, .65)), linear-gradient(160deg, rgba(255, 255, 255, .14), transparent 30%); }
     .crt .play-over { position: absolute; inset: 0; z-index: 3; border: 0; background: transparent; cursor: pointer; }
+    .crt .play-over:focus-visible { outline-offset: -5px; }
     .deck { margin: 10px 10px 0; padding: 12px 14px; border-radius: 6px 6px 12px 12px; display: flex; align-items: center; gap: 14px;
       background: linear-gradient(180deg, #2b1c47, #1a1030); box-shadow: inset 0 2px 0 rgba(255, 255, 255, .08); }
     .stick { width: 34px; height: 34px; border-radius: 50%; flex: none; position: relative; margin-top: 10px; background: radial-gradient(circle at 35% 30%, #4b3a6e, #160d28); box-shadow: inset 0 0 0 2px #0c0616; }
@@ -154,7 +160,7 @@
       <h1>NEAR <span>Arcade</span></h1>
       <p>Five browser games on NEAR testnet. Your rivals are AI agents with their own wallets, hidden moves are sealed onchain and opened later, and every score below is read live from the chain. Play as a guest, or sign in with a NEAR wallet.</p>
     </header>
-    <div class="ticker" aria-label="Live numbers from NEAR testnet"><ul id="ticker"><li>Reading the chain…</li></ul></div>
+    <section class="ticker" aria-label="Live numbers from NEAR testnet"><ul id="ticker"><li>Reading the chain…</li></ul><button id="tickerPause" class="pause" aria-pressed="false">Pause</button></section>
 
     <main class="floor" id="floor" aria-label="Games"></main>
 
@@ -181,23 +187,23 @@
 
   <script>
     const GAMES = [
-      { title: 'Sushi Sabotage', slug: 'sushi', glow: '#ff6a3c', badge: '1–4 players', thumb: 'thumbs/sushi.webp',
+      { title: 'Sushi Sabotage', slug: 'sushi', glow: '#ff6a3c', badge: '1–4 players', thumb: '/thumbs/sushi.webp',
         url: 'https://sushi.lopeselio.online/', repo: 'https://github.com/lopeselio/sushi-sabotage',
         blurb: 'A three-minute sushi kitchen race. Wreck rivals’ dishes in secret; the sabotage log is sealed onchain and opened when the shift ends.',
         accounts: [['sushi-sabotage.testnet', 'Game contract', true], ['sushi-sabotage-ref.testnet', 'Referee'], ['sushi-sabotage-relay.testnet', 'Relay']] },
-      { title: 'Bazaar of Liars', slug: 'bazaar', glow: '#ffc53d', badge: 'solo, in a walkable New York', thumb: 'thumbs/bazaar.webp',
+      { title: 'Bazaar of Liars', slug: 'bazaar', glow: '#ffc53d', light: true, badge: 'solo, in a walkable New York', thumb: '/thumbs/bazaar.webp',
         url: 'https://bazaar.lopeselio.online/', repo: 'https://github.com/lopeselio/bazaar-of-liars',
         blurb: 'Haggle with AI merchants who bluff. Read their tells, call their lies, buy low and sell high; the chain proves every bluff was fair.',
         accounts: [['v3.bazaar-liars.testnet', 'Game contract', true], ['bazaar-server.testnet', 'Game server'], ['bazaar-intents.testnet', 'NEAR Intents verifier', true], ['bazaar-funds-1108.testnet', 'Pays the agents’ gas']] },
-      { title: 'Realm Ledger', slug: 'realm', glow: '#7c8cff', badge: 'turn-based conquest', thumb: 'thumbs/realm.webp',
+      { title: 'Realm Ledger', slug: 'realm', glow: '#7c8cff', badge: 'turn-based conquest', thumb: '/thumbs/realm.webp',
         url: 'https://realm.lopeselio.online/', repo: 'https://github.com/lopeselio/realm-ledger',
         blurb: 'Conquest on a living war table. Rival realms are ruled by AI agents with wallets; every season all rulers seal their orders at once.',
         accounts: [['realm-ledger.testnet', 'Game contract', true], ['realm-ledger-ops.testnet', 'Referee']] },
-      { title: 'Parkwright', slug: 'parkwright', glow: '#3ee0b0', badge: 'theme-park builder', thumb: 'thumbs/parkwright.webp',
+      { title: 'Parkwright', slug: 'parkwright', glow: '#3ee0b0', light: true, badge: 'theme-park builder', thumb: '/thumbs/parkwright.webp',
         url: 'https://parkwright.lopeselio.online/', repo: 'https://github.com/lopeselio/parkwright',
         blurb: 'Lay paths, raise rides and coasters, keep the crowds happy. Visitors are paid for by agents with their own NEAR wallets; claim your park and withdraw what it earns.',
         accounts: [['park.parkwright.testnet', 'Game contract', true], ['parkwright.testnet', 'Server and admin'], ['g0.parkwright.testnet', 'Visitor-group agent']] },
-      { title: 'Fogwater', slug: 'fogwater', glow: '#5aa8ff', badge: '1v1 against an AI or a friend', thumb: 'thumbs/fogwater.webp',
+      { title: 'Fogwater', slug: 'fogwater', glow: '#5aa8ff', badge: '1v1 against an AI or a friend', thumb: '/thumbs/fogwater.webp',
         url: 'https://fogwater.lopeselio.online/', repo: 'https://github.com/lopeselio/fogwater',
         blurb: 'A night sea battle in voxels. Your fleet is sealed onchain as a Merkle root; every hit or miss is proven against it until the last ship sinks.',
         accounts: [['fogwater.testnet', 'Game contract', true], ['fogwater-ref.testnet', 'Referee'], ['fogwater-relay.testnet', 'Relay']] },
@@ -256,9 +262,11 @@
       async realm() {
         // No count view: find the newest campaign id by doubling, then binary search.
         const has = async (n) => !!(await view('realm-ledger.testnet', 'get_campaign', { campaign: n }));
-        let hi = 1; while (hi < 1e6 && await has(hi)) hi *= 2;
-        let lo = Math.floor(hi / 2); while (hi - lo > 1) { const mid = (lo + hi) >> 1; if (await has(mid)) lo = mid; else hi = mid; }
-        const ids = Array.from({ length: Math.min(24, lo) }, (_, i) => lo - i);
+        // Ids start at 0; `lo` ends as the newest id (or -1 with no campaigns at all).
+        let lo = -1, hi = 1;
+        if (await has(0)) { lo = 0; while (hi < 1e6 && await has(hi)) { lo = hi; hi *= 2; } while (hi - lo > 1) { const mid = (lo + hi) >> 1; if (await has(mid)) lo = mid; else hi = mid; } }
+        const count = lo + 1;
+        const ids = Array.from({ length: Math.min(24, count) }, (_, i) => lo - i);
         const camps = (await Promise.all(ids.map((n) => view('realm-ledger.testnet', 'get_campaign', { campaign: n }).catch(() => null)))).filter(Boolean);
         const done = camps.filter((c) => c.phase === 'Finished' && c.winner != null);
         const wins = new Map();
@@ -270,8 +278,8 @@
         }
         const rows = [...wins].sort((a, b) => b[1] - a[1]).slice(0, 5).map(([n, w]) => [n, `${w} win${w === 1 ? '' : 's'}`]);
         return { title: `Wins in the last ${camps.length} campaigns`, rows, empty: 'No campaign has finished recently.',
-          stats: [[fmt(lo), 'campaigns on the ledger'], [fmt(done.length), 'finished recently'], [fmt(camps.reduce((a, c) => a + c.season, 0)), 'seasons sealed']],
-          ticker: [`<b>${fmt(lo)}</b> campaigns on the Realm Ledger`] };
+          stats: [[fmt(count), 'campaigns on the ledger'], [fmt(done.length), 'finished recently'], [fmt(camps.reduce((a, c) => a + c.season, 0)), 'seasons sealed']],
+          ticker: [`<b>${fmt(count)}</b> campaigns on the Realm Ledger`] };
       },
       async parkwright() {
         const parks = [];
@@ -300,9 +308,10 @@
     for (const g of GAMES) {
       const cab = el('article', { className: 'cab', id: `cab-${g.slug}` });
       cab.style.setProperty('--glow', g.glow);
+      if (g.light) cab.classList.add('light'); // dark marquee text where the glow is bright
       const play = () => openGame(g);
-      const over = el('button', { className: 'play-over', onclick: play });
-      over.setAttribute('aria-label', `Play ${g.title}`);
+      const over = el('button', { className: 'play-over', onclick: play, tabIndex: -1 });
+      over.setAttribute('aria-hidden', 'true'); // mouse shortcut; the Insert coin button is the keyboard path
       const board = el('div', { className: 'board' }, el('h3', { textContent: 'High scores' }), el('ol', {}, el('li', { className: 'empty', textContent: 'Reading the chain…' })));
       const stats = el('div', { className: 'stats' });
       const coin = el('details', { className: 'coinbox' }, el('summary', {}, 'Game accounts on NEAR: ', el('b', { textContent: '…' })), el('ul'));
@@ -310,7 +319,7 @@
       cab.append(
         el('header', { className: 'marquee' }, el('h2', { textContent: g.title }), el('small', { textContent: g.badge })),
         el('div', { className: 'bezel' }, el('div', { className: 'crt' }, el('img', { src: g.thumb, alt: `${g.title} in play`, loading: 'lazy', width: 480, height: 300 }), over)),
-        el('div', { className: 'deck' }, deco('stick'), deco('pads', el('i'), el('i'), el('i')), el('button', { className: 'start', textContent: 'Insert coin', onclick: play })),
+        el('div', { className: 'deck' }, deco('stick'), deco('pads', el('i'), el('i'), el('i')), (() => { const b = el('button', { className: 'start', textContent: 'Insert coin', onclick: play }); b.setAttribute('aria-label', `Insert coin: play ${g.title}`); return b; })()),
         el('div', { className: 'about' }, el('p', { textContent: g.blurb }), el('div', { className: 'links' },
           el('a', { href: g.url, target: '_blank', rel: 'noopener', textContent: 'Open in a new tab' }),
           el('a', { href: g.repo, target: '_blank', rel: 'noopener', textContent: 'Code on GitHub' }))),
@@ -324,11 +333,19 @@
 
     // ── fill in live data ──
     const tickerItems = [];
+    // Ticker lines are built only from numbers (fmt), never from names read off the chain.
+    const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
     function renderTicker() {
       if (!tickerItems.length) return;
-      const items = [...tickerItems, ...tickerItems]; // doubled so the scroll loops seamlessly
-      document.getElementById('ticker').innerHTML = items.map((t) => `<li>${t}</li>`).join('');
+      const once = tickerItems.map((t) => `<li>${t}</li>`).join('');
+      // The second copy only makes the scroll loop seamlessly: hidden from screen readers, skipped when still.
+      document.getElementById('ticker').innerHTML = once + (still ? '' : tickerItems.map((t) => `<li aria-hidden="true">${t}</li>`).join(''));
     }
+    const pause = document.getElementById('tickerPause');
+    if (still) pause.hidden = true;
+    pause.onclick = () => { const on = pause.closest('.ticker').classList.toggle('paused'); pause.setAttribute('aria-pressed', String(on)); pause.textContent = on ? 'Play' : 'Pause'; };
+    let loaded = 0;
+    const settle = () => { if (++loaded === GAMES.length && !tickerItems.length) document.getElementById('ticker').innerHTML = '<li>NEAR testnet didn’t answer. Reload to try again.</li>'; };
     for (const g of GAMES) {
       const p = parts[g.slug];
       LOADERS[g.slug]().then((d) => {
@@ -340,7 +357,7 @@
         tickerItems.push(...d.ticker); renderTicker();
       }).catch(() => {
         p.board.querySelector('ol').replaceChildren(el('li', { className: 'empty', textContent: 'The chain didn’t answer. Reload to try again.' }));
-      });
+      }).finally(settle);
     }
 
     // Every game account: balance, and for contracts the share of the balance still free for storage.
@@ -369,7 +386,7 @@
             el('a', { href: explorer(r.id), target: '_blank', rel: 'noopener', textContent: r.id }),
             el('em', { textContent: r.missing ? 'n/a' : `${fmt(r.balance, 2)} NEAR` }),
             el('small', { textContent: r.contract && !r.missing ? `${r.role}, ${fmt(Math.max(0, r.free), 2)} NEAR free for storage` : r.role }));
-          if (r.contract && !r.missing) {
+          if (r.contract && !r.missing && r.balance > 0) {
             const gauge = el('div', { className: 'gauge', title: 'Share of the balance still free for storage' }, el('i', { style: `width:${Math.max(2, Math.min(100, (r.free / r.balance) * 100))}%` }));
             li.append(gauge);
           }
@@ -381,15 +398,23 @@
     // ── playing a game inside the arcade, at its own path (/sushi, /bazaar, …) ──
     const screen = document.getElementById('screen');
     const frame = document.getElementById('screenFrame');
+    const page = document.querySelector('.wrap');
+    let opener = null;
     function show(g) {
+      if (!screen.classList.contains('on')) opener = document.activeElement;
+      page.inert = true; // the arcade behind the game can't take focus
       document.getElementById('screenTitle').textContent = g.title;
       document.getElementById('screenOpen').href = g.url;
       if (frame.src !== g.url) frame.src = g.url;
       screen.classList.add('on');
       document.title = `${g.title} · NEAR Arcade`;
+      document.getElementById('screenClose').focus();
     }
     function openGame(g) { history.pushState({ slug: g.slug }, '', `/${g.slug}`); show(g); }
-    function close() { screen.classList.remove('on'); frame.src = 'about:blank'; document.title = 'NEAR Arcade'; }
+    function close() {
+      screen.classList.remove('on'); frame.src = 'about:blank'; document.title = 'NEAR Arcade'; page.inert = false;
+      if (opener && document.contains(opener)) opener.focus(); opener = null;
+    }
     const fromPath = () => GAMES.find((g) => location.pathname.replace(/^\/|\/$/g, '') === g.slug || location.hash === `#${g.slug}`);
     document.getElementById('screenClose').onclick = () => { if (history.state?.slug) history.back(); else { history.replaceState(null, '', '/'); close(); } };
     window.addEventListener('popstate', () => { const g = fromPath(); if (g) show(g); else close(); });
