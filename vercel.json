@@ -1,6 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "cleanUrls": true,
-  "rewrites": [{ "source": "/:game(sushi|bazaar|realm|parkwright)", "destination": "/index.html" }],
+  "rewrites": [{ "source": "/(sushi|bazaar|realm|parkwright)/?", "destination": "/" }],
   "headers": [{ "source": "/(.*)", "headers": [{ "key": "Cache-Control", "value": "no-cache" }] }]
 }
