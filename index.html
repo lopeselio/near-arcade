@@ -78,6 +78,13 @@
     .crt::after { /* curved glass: vignette + glare */ content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 2;
       background: radial-gradient(120% 90% at 50% 50%, transparent 58%, rgba(0, 0, 0, .65)), linear-gradient(160deg, rgba(255, 255, 255, .14), transparent 30%); }
     .crt .play-over { position: absolute; inset: 0; z-index: 3; border: 0; background: transparent; cursor: pointer; }
+    /* device plate: where a cabinet can be played */
+    .plate { display: inline-flex; align-items: center; gap: 6px; margin: 8px auto 0; padding: 3px 10px; border-radius: 999px;
+      font: 700 11px/1.4 'Chakra Petch', sans-serif; letter-spacing: .12em; text-transform: uppercase; color: #fff;
+      background: rgba(0, 0, 0, .35); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .3); }
+    .plate.solo { background: #3a0d1e; box-shadow: inset 0 0 0 1px #ff5c8a, 0 0 12px rgba(255, 92, 138, .45); }
+    .cab.light .plate { color: #fff; }
+    .warn { margin: 6px 12px 0; padding: 8px 10px; border-radius: 8px; font-size: 13px; background: #3a0d1e; color: #ffd6e2; box-shadow: inset 0 0 0 1px #ff5c8a; }
     .crt .play-over:focus-visible { outline-offset: -5px; }
     .deck { margin: 10px 10px 0; padding: 12px 14px; border-radius: 6px 6px 12px 12px; display: flex; align-items: center; gap: 14px;
       background: linear-gradient(180deg, #2b1c47, #1a1030); box-shadow: inset 0 2px 0 rgba(255, 255, 255, .08); }
@@ -223,6 +230,13 @@
         accounts: [['inside-job.testnet', 'Game contract', true], ['dao.inside-job.testnet', 'Treasury (Sputnik DAO)'], ['inside-job-ref.testnet', 'Referee'], ['seat1.inside-job.testnet', 'AI council desk']] },
     ];
     const ARCADE_REPO = 'https://github.com/lopeselio/near-arcade';
+    // Where each cabinet plays. A game sets `play: 'desktop'` or `play: 'mobile'` only when the other kind of device can't run it.
+    const PLATES = {
+      any: ['Pocket + Cabinet', 'Plays on phones (touch controls) and on desktop browsers'],
+      desktop: ['Cabinet only', 'Desktop only: needs a keyboard, a mouse and a big screen'],
+      mobile: ['Pocket only', 'Phone only: built for touch'],
+    };
+    const isPhone = matchMedia('(pointer: coarse) and (max-width: 900px)').matches;
 
     // ── NEAR testnet reads (public RPC, no keys; the first that answers wins) ──
     const RPCS = ['https://rpc.testnet.fastnear.com', 'https://test.rpc.fastnear.com', 'https://near-testnet.drpc.org'];
@@ -344,7 +358,10 @@
       const coin = el('details', { className: 'coinbox' }, el('summary', {}, 'Game accounts on NEAR: ', el('b', { textContent: '…' })), el('ul'));
       const deco = (cls, ...k) => { const s = el('span', { className: cls }, ...k); s.setAttribute('aria-hidden', 'true'); return s; };
       cab.append(
-        el('header', { className: 'marquee' }, el('h2', { textContent: g.title }), el('small', { textContent: g.badge })),
+        el('header', { className: 'marquee' }, el('h2', { textContent: g.title }), el('small', { textContent: g.badge }),
+          (() => { const [label, tip] = PLATES[g.play ?? 'any']; return el('span', { className: `plate${g.play && g.play !== 'any' ? ' solo' : ''}`, title: tip, textContent: `${g.play === 'mobile' ? '📱' : g.play === 'desktop' ? '🖥' : '📱🖥'} ${label}` }); })()),
+        (g.play === 'desktop' && isPhone) ? el('p', { className: 'warn', textContent: 'Full-size cabinet: this one needs a desktop. Bookmark it for the big screen, or press Insert coin anyway.' })
+          : (g.play === 'mobile' && !isPhone) ? el('p', { className: 'warn', textContent: 'Pocket cabinet: built for a phone. Open it on your phone, or press Insert coin anyway.' }) : '',
         el('div', { className: 'bezel' }, el('div', { className: 'crt' }, el('img', { src: g.thumb, alt: `${g.title} in play`, loading: 'lazy', width: 480, height: 300 }), over)),
         el('div', { className: 'deck' }, deco('stick'), deco('pads', el('i'), el('i'), el('i')), (() => { const b = el('button', { className: 'start', textContent: 'Insert coin', onclick: play }); b.setAttribute('aria-label', `Insert coin: play ${g.title}`); return b; })()),
         el('div', { className: 'about' }, el('p', { textContent: g.blurb }), el('div', { className: 'links' },
