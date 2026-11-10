@@ -228,6 +228,10 @@
         url: 'https://inside-job.lopeselio.online/', repo: 'https://github.com/lopeselio/inside-job',
         blurb: 'Five council members run a DAO treasury through the night; one is secretly draining it. Every spend is a real Sputnik DAO proposal, roles and votes are sealed onchain, and the AI council can vote but never move money.',
         accounts: [['inside-job.testnet', 'Game contract', true], ['dao.inside-job.testnet', 'Treasury (Sputnik DAO)'], ['inside-job-ref.testnet', 'Referee'], ['seat1.inside-job.testnet', 'AI council desk']] },
+      { title: 'Kraterra', slug: 'kraterra', glow: '#ff7a45', badge: 'voxel artillery, 1v1 or vs an AI tank', thumb: '/thumbs/kraterra.webp',
+        url: 'https://kraterra.lopeselio.online/', repo: 'https://github.com/lopeselio/kraterra',
+        blurb: 'Turn-based tank duels that carve craters in voxel hills. NEAR’s block randomness draws the map and the weapon pool, you draft munitions (rare ones are NFTs you own), and every shot is recorded and replayed onchain.',
+        accounts: [['kraterra.testnet', 'Game contract', true], ['kraterra-ref.testnet', 'Referee'], ['kraterra-relay.testnet', 'Relay'], ['basalt.kraterra.testnet', 'AI tank']] },
     ];
     const ARCADE_REPO = 'https://github.com/lopeselio/near-arcade';
     // Where each cabinet plays. A game sets `play: 'desktop'` or `play: 'mobile'` only when the other kind of device can't run it.
@@ -339,6 +343,14 @@
           empty: 'No ranked shifts yet. Sign in with NEAR and catch the Insider to be first.',
           stats: [[fmt(info.played), 'night shifts'], [fmt(props), 'DAO proposals voted'], ['3 of 5', 'votes to pass a spend']],
           ticker: [`<b>${fmt(props)}</b> treasury proposals voted on the Inside Job DAO`] };
+      },
+      async kraterra() {
+        const [rows, cfg, packs] = await Promise.all([view('kraterra.testnet', 'leaderboard', { limit: 5 }), view('kraterra.testnet', 'get_config', {}), view('kraterra.testnet', 'nft_total_supply', {})]);
+        const dmg = rows.reduce((a, [, s]) => a + Number(s.damage), 0);
+        return { title: 'Gunners’ ledger', rows: rows.map(([id, s]) => [id === 'basalt.kraterra.testnet' ? 'Basalt (AI)' : who(id), `${s.wins}W ${s.losses}L · best ${s.best}`]),
+          empty: 'No duels settled yet. Fire the first shot.',
+          stats: [[fmt(cfg[2]), 'duels on the chain'], [fmt(packs), 'munition pack NFTs'], [fmt(dmg), 'damage by the top gunners']],
+          ticker: [`<b>${fmt(cfg[2])}</b> artillery duels recorded in Kraterra`] };
       },
     };
 

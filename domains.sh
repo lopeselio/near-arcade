@@ -13,6 +13,7 @@
 #   fogwater.lopeselio.online    -> Fogwater         (Azure Container Apps, RG fogwater)
 #   emberfall.lopeselio.online   -> Emberfall        (Azure Container Apps, RG emberfall)
 #   inside-job.lopeselio.online  -> Inside Job       (Azure Container Apps, RG inside-job)
+#   kraterra.lopeselio.online    -> Kraterra         (Azure Container Apps, RG kraterra)
 #   realm.lopeselio.online       -> Realm Ledger     (Vercel project realm-ledger)
 #
 # The root domain and www stay on the personal site; email forwarding records are untouched.
@@ -23,7 +24,7 @@ SCOPE=${VERCEL_SCOPE:-lopeselios-projects}
 cd "$(dirname "$0")"
 
 # sub | resource group | container app
-ACA=("sushi sushi-sabotage sushi-sabotage" "bazaar bazaar-liars bazaar-liars" "parkwright parkwright parkwright" "fogwater fogwater fogwater" "emberfall emberfall emberfall" "inside-job inside-job inside-job")
+ACA=("sushi sushi-sabotage sushi-sabotage" "bazaar bazaar-liars bazaar-liars" "parkwright parkwright parkwright" "fogwater fogwater fogwater" "emberfall emberfall emberfall" "inside-job inside-job inside-job" "kraterra kraterra kraterra")
 # sub | vercel project
 VERCEL=("arcade near-arcade" "realm realm-ledger")
 
@@ -77,6 +78,7 @@ bind() {
   az containerapp update -g fogwater -n fogwater --set-env-vars "BETTER_AUTH_URL=https://fogwater.$DOMAIN" -o none
   az containerapp update -g emberfall -n emberfall --set-env-vars "BETTER_AUTH_URL=https://emberfall.$DOMAIN" -o none
   az containerapp update -g inside-job -n inside-job --set-env-vars "BETTER_AUTH_URL=https://inside-job.$DOMAIN" -o none
+  az containerapp update -g kraterra -n kraterra --set-env-vars "BETTER_AUTH_URL=https://kraterra.$DOMAIN" -o none
 
   # the arcade links to the subdomains from now on
   echo "== arcade links"
@@ -88,7 +90,7 @@ bind() {
   rm -f index.html.bak
   vercel deploy --prod --yes --scope "$SCOPE" >/dev/null
   echo
-  for sub in arcade sushi bazaar parkwright realm fogwater emberfall inside-job; do
+  for sub in arcade sushi bazaar parkwright realm fogwater emberfall inside-job kraterra; do
     printf "%-28s %s\n" "https://$sub.$DOMAIN/" "$(curl -s -o /dev/null -w '%{http_code}' "https://$sub.$DOMAIN/" || true)"
   done
 }
