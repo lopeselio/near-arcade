@@ -232,6 +232,10 @@
         url: 'https://kraterra.lopeselio.online/', repo: 'https://github.com/lopeselio/kraterra',
         blurb: 'Turn-based tank duels that carve craters in voxel hills. NEAR’s block randomness draws the map and the weapon pool, you draft munitions (rare ones are NFTs you own), and every shot is recorded and replayed onchain.',
         accounts: [['kraterra.testnet', 'Game contract', true], ['kraterra-ref.testnet', 'Referee'], ['kraterra-relay.testnet', 'Relay'], ['basalt.kraterra.testnet', 'AI tank']] },
+      { title: 'Clawtide', slug: 'clawtide', glow: '#2fd6c4', light: true, badge: 'minesweeper royale, up to 4 crabs', thumb: '/thumbs/clawtide.webp',
+        url: 'https://clawtide.lopeselio.online/', repo: 'https://github.com/lopeselio/clawtide',
+        blurb: 'Hermit crabs race across a sandbar to dig up pearls and pry open clams; every tile tells you how many urchins are buried around it. NEAR’s block randomness lays out each sandbar, every hop is sealed onchain, and you raid rivals’ rockpools for PEARL.',
+        accounts: [['clawtide.testnet', 'Game contract (PEARL)', true], ['clawtide-ref.testnet', 'Referee'], ['clawtide-relay.testnet', 'Relay'], ['kelpie.clawtide.testnet', 'AI crab']] },
     ];
     const ARCADE_REPO = 'https://github.com/lopeselio/near-arcade';
     // Where each cabinet plays. A game sets `play: 'desktop'` or `play: 'mobile'` only when the other kind of device can't run it.
@@ -351,6 +355,14 @@
           empty: 'No duels settled yet. Fire the first shot.',
           stats: [[fmt(cfg[2]), 'duels on the chain'], [fmt(packs), 'munition pack NFTs'], [fmt(dmg), 'damage by the top gunners']],
           ticker: [`<b>${fmt(cfg[2])}</b> artillery duels recorded in Kraterra`] };
+      },
+      async clawtide() {
+        const [rows, season, crown] = await Promise.all([view('clawtide.testnet', 'leaderboard', { limit: 5 }), view('clawtide.testnet', 'season_info', {}), view('clawtide.testnet', 'get_crown', {})]);
+        const ai = (id) => /^[a-z]+\.clawtide\.testnet$/.test(id) && !id.startsWith('e2e');
+        return { title: `Season ${season.season} pearl hoards`, rows: rows.map((r) => [`${crown && crown.account === r.account ? '👑 ' : ''}${ai(r.account) ? `${r.name} (AI)` : who(r.account)}`, `${fmt(r.pearls)} PEARL`]),
+          empty: 'No pearls banked yet. Dig the first sandbar.',
+          stats: [[fmt(season.rounds_settled), 'sandbars settled onchain'], [fmt(season.raids), 'rockpool raids'], [fmt(season.supply), 'PEARL in existence']],
+          ticker: [`<b>${fmt(season.supply)}</b> PEARL dug up in Clawtide`] };
       },
     };
 
