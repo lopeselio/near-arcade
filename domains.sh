@@ -82,14 +82,14 @@ bind() {
   az containerapp update -g kraterra -n kraterra --set-env-vars "BETTER_AUTH_URL=https://kraterra.$DOMAIN" -o none
   az containerapp update -g clawtide -n clawtide --set-env-vars "BETTER_AUTH_URL=https://clawtide.$DOMAIN" -o none
 
-  # the arcade links to the subdomains from now on
+  # the arcade links to the subdomains from now on (the game URLs live in src/games.ts; Vercel rebuilds the app)
   echo "== arcade links"
   sed -i.bak \
     -e "s#https://sushi-sabotage\.[a-z0-9-]*\.northeurope\.azurecontainerapps\.io/#https://sushi.$DOMAIN/#" \
     -e "s#https://bazaar-liars\.[a-z0-9-]*\.northeurope\.azurecontainerapps\.io/#https://bazaar.$DOMAIN/#" \
     -e "s#https://parkwright\.[a-z0-9-]*\.northeurope\.azurecontainerapps\.io/#https://parkwright.$DOMAIN/#" \
-    -e "s#https://realm-ledger\.vercel\.app/#https://realm.$DOMAIN/#" index.html
-  rm -f index.html.bak
+    -e "s#https://realm-ledger\.vercel\.app/#https://realm.$DOMAIN/#" src/games.ts
+  rm -f src/games.ts.bak
   vercel deploy --prod --yes --scope "$SCOPE" >/dev/null
   echo
   for sub in arcade sushi bazaar parkwright realm fogwater emberfall inside-job kraterra clawtide; do
