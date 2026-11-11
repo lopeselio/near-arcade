@@ -1,5 +1,12 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "rewrites": [{ "source": "/:game(sushi|bazaar|realm|parkwright|fogwater|emberfall|inside-job|kraterra|clawtide)", "destination": "/index.html" }],
-  "headers": [{ "source": "/(.*)", "headers": [{ "key": "Cache-Control", "value": "no-cache" }] }]
+  "framework": "vite",
+  "installCommand": "pnpm install --frozen-lockfile",
+  "buildCommand": "pnpm build",
+  "outputDirectory": "dist",
+  "rewrites": [{ "source": "/:slug([a-z0-9-]+)", "destination": "/index.html" }],
+  "headers": [
+    { "source": "/assets/(.*)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }] },
+    { "source": "/((?!assets/).*)", "headers": [{ "key": "Cache-Control", "value": "no-cache" }] }
+  ]
 }
