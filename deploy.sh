@@ -20,6 +20,11 @@ az storage blob service-properties update --account-name "$SA" --account-key "$K
 # assets first, so the new index.html never points at files that aren't there yet
 up -s dist/assets --destination-path assets --pattern '*.js' --content-type 'text/javascript; charset=utf-8' --content-cache-control 'public, max-age=31536000, immutable'
 up -s dist/assets --destination-path assets --pattern '*.css' --content-type 'text/css; charset=utf-8' --content-cache-control 'public, max-age=31536000, immutable'
+# anything else Vite puts in assets/ (images, fonts): content type guessed from the extension
+for f in dist/assets/*; do
+  case "$f" in *.js|*.css) continue ;; esac
+  az storage blob upload --account-name "$SA" --account-key "$KEY" -c '$web' -f "$f" -n "assets/$(basename "$f")" --content-cache-control 'public, max-age=31536000, immutable' --overwrite -o none
+done
 up -s dist/thumbs --destination-path thumbs --pattern '*.webp' --content-type image/webp --content-cache-control 'public, max-age=86400'
 az storage blob upload --account-name "$SA" --account-key "$KEY" -c '$web' -f dist/index.html -n index.html --content-type 'text/html; charset=utf-8' --content-cache-control 'no-cache' --overwrite -o none
 az storage account show -g "$RG" -n "$SA" --query primaryEndpoints.web -o tsv
