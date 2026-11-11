@@ -28,7 +28,7 @@ export function Cabinet({ game: g, panel, accounts, onPlay }: Props) {
         <h2>{g.title}</h2>
         <small>{g.badge}</small>
         <span className={`plate${g.play && g.play !== 'any' ? ' solo' : ''}`} title={tip}>
-          {icon} {label}
+          {`${icon} ${label}`}
         </span>
       </header>
       {warning && <p className="warn">{warning}</p>}

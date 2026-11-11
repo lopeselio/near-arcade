@@ -17,14 +17,14 @@ export function ChangeMachine({ rows }: { rows: AccountRow[] | null }) {
           <>
             <div className="total">
               <b>{fmt(live.reduce((a, r) => a + r.balance, 0), 1)}</b>
-              <span>NEAR held by {live.length} game accounts</span>
+              <span>{`NEAR held by ${live.length} game accounts`}</span>
             </div>
             <div className="total">
               <b>{fmt(contracts.length)}</b>
               <span>contracts running the games</span>
             </div>
             <div className="total">
-              <b>{fmt(contracts.reduce((a, r) => a + r.storage, 0) / 1e6, 2)} MB</b>
+              <b>{`${fmt(contracts.reduce((a, r) => a + r.storage, 0) / 1e6, 2)} MB`}</b>
               <span>of game state stored onchain</span>
             </div>
           </>
