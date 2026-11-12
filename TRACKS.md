@@ -2,6 +2,8 @@
 
 What each claimed track rests on: which games, the contract and method, the standard, a transaction you can open, and a command you can run. Each track ends with a strength note, so you can see where a claim is only partial. All accounts are on NEAR testnet. All code is in the game's own repo (links in the [README](README.md#the-games)).
 
+**One copy-paste proof per track**, with real match ids and the output to expect, is in the README: [Check every track yourself](README.md#check-every-track-yourself-no-keys).
+
 On the site, the track chips light up the cabinets behind a track, e.g. [arcade.lopeselio.online/?track=privacy](https://arcade.lopeselio.online/?track=privacy). The live numbers are on [/thesis](https://arcade.lopeselio.online/thesis).
 
 **Checks that need nothing but `curl`** (public RPC, no keys):
@@ -17,7 +19,7 @@ curl -s https://rpc.testnet.fastnear.com -H 'content-type: application/json' -d 
 node scripts/thesis-data.mjs
 ```
 
-Public RPC rate-limits bursts. If a call answers `-429`, wait a few seconds, or swap the endpoint for `https://near-testnet.drpc.org`.
+Public RPC rate-limits bursts. If a call answers `-429`, wait a few seconds, or swap the endpoint for `https://near-testnet.drpc.org` or `https://testnet-rpc.intea.rs` (both listed on [docs.near.org's RPC providers page](https://docs.near.org/api/rpc/providers)).
 
 ---
 
@@ -32,7 +34,8 @@ Public RPC rate-limits bursts. If a call answers `-429`, wait a few seconds, or 
 | Emberfall | EMBER (NEP-141) pots, burns and mints; Warden NFTs | [settle_match tx](https://testnet.nearblocks.io/txns/RRQxP6fWCefonQk5JUSPs9eWcLXAZBY96Yw1dmaNu85) |
 | Clawtide | PEARL (NEP-141) minted by settled rounds, moved by raids | [settle_round tx](https://testnet.nearblocks.io/txns/Du3wyMGeKF4655h78WCkb1Ys3462HYHrgRw1FJSSN6FX) |
 | Parkwright | CR (NEP-141) paid by patron agents into parks you can claim and withdraw from | `list_parks`, `audit` on `park.parkwright.testnet` |
-| Realm Ledger, Inside Job, Fogwater, Kraterra | sealed orders and treasuries, a DAO treasury, Merkle-sealed fleets, VRF duels and NFTs | sections below |
+| Kraterra | munition-pack NFTs (NEP-171) you own and draft into a duel to unlock their rare weapon; duels drawn from NEAR's VRF, every shot recorded and replayed | `nft_total_supply`, `leaderboard` on `kraterra.testnet`; `pnpm verify em5cqa --host https://kraterra.lopeselio.online` |
+| Realm Ledger, Inside Job, Fogwater | sealed orders and escrowed hires, a DAO treasury, Merkle-sealed fleets | sections below |
 
 **Strength: strong** for the loop and for hiding the chain. *Partial* on "real economies" for Fogwater and Kraterra: they record play and stats onchain but have no token or money flow. Sign-in is NEAR-wallet only, with no social login.
 
@@ -125,13 +128,14 @@ Public RPC rate-limits bursts. If a call answers `-429`, wait a few seconds, or 
 **AI Swarms.**
 
 - **Bazaar of Liars:** 13 agents in one market:
-  - Sealed-bid cargo auctions: `ship_arrives` → `commit_bid` → `reveal_bid` → `settle_auction` ([settle tx](https://testnet.nearblocks.io/txns/5UR4SgQp2GRq53aaPvacZMo4t3S2GXXFzceMHD394HdD)).
-  - Customers post paid orders that traders fill, and merchants hire the runner.
+  - Every agent's purse, goods, daily cap and today's spend are one contract view (`agents`; the README has the command).
+  - Sealed-bid cargo auctions: `ship_arrives` → `commit_bid` → `reveal_bid` → `settle_auction`. Merchants, traders and the wholesaler decide their own bids.
+  - Customers post paid orders that traders fill (`orders`), and merchants hire the runner.
   - Merchants barter with the wholesaler through NEAR Intents (see defi).
 - **Realm Ledger:** eight AI rulers plus mercenary and spy companies. Rulers hire companies with escrowed pay, companies deliver, and treaties carry tribute.
 - **Sushi Sabotage:** four AI chefs buy from two seller agents.
 
-**Strength: partial.** Bazaar is a real multi-agent market. The others are small, and no agent coordinates collective purchases.
+**Strength: partial.** Bazaar is a real multi-agent market. The others are small, and no agent coordinates collective purchases. Activity depends on the agents' purses: on 12 Nov 2026 the customers were posting and paying for orders, while the last twelve cargo lots closed unsold because most merchants and traders were short of coins.
 
 ## memecoins
 
