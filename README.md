@@ -29,11 +29,12 @@ These nine games flip that. Players start as guests with no wallet; the chain wo
 ## Try it (do X, see Y)
 
 1. Open **https://arcade.lopeselio.online**. You see nine cabinets; each one's high scores, stats and NEAR accounts are read live from testnet in your browser.
-2. Press **Insert coin** on any cabinet: the game opens in the page at its own path (e.g. `/fogwater`); **Escape** or **Back** returns to the floor. **Open in a new tab** plays it full screen (wallet sign-in works best there).
+2. Press **Insert coin** on any cabinet: the game opens in the page at its own path (e.g. `/fogwater`); **Escape** or **Back** returns to the floor. **Open in a new tab** plays it full screen (wallet sign-in works best there). Every plate reads **Pocket + Cabinet** except Bazaar of Liars, **Cabinet only**: its walkable city's haggle and trade prompts need a keyboard; on a phone its cabinet links the classic desert bazaar (`bazaar.lopeselio.online/?classic`), which plays by touch.
 3. Every game plays as a guest with no wallet; **Sign in with NEAR** (any testnet wallet) to be ranked and to own NFTs.
 4. Press a **track chip** under the ticker (e.g. **Privacy**): the cabinets that prove it light up, each with a note naming the contract method to look at, and the rest dim. The address bar shows `?track=privacy`; press the chip again to clear it.
 5. Open **https://arcade.lopeselio.online/thesis**: the numbers first show a dimmed snapshot, then turn bright as live reads arrive (about 10–30 s on public RPC). Open **Every agent account and what its keys may do**: each one has only function-call keys.
 6. Each game's README has its own do-X-see-Y steps and a verify command (`pnpm verify …` in most; Parkwright's is `/api/parks/<id>/verify`) that re-checks a finished match against its contract. [Check every track yourself](#check-every-track-yourself-no-keys) has one ready-to-paste command per track, with real match ids and the output to expect.
+7. Open **https://arcade.lopeselio.online/no-such-game**: an *Out of order* page says there's no cabinet there and links all nine games, the floor and /thesis.
 
 ## Tracks: where to see each one
 
@@ -194,7 +195,7 @@ The script needs no keys and no install beyond Node. It prints a summary, e.g. `
 
 ## Deploy
 
-- **Vercel** (project `near-arcade`, live at https://arcade.lopeselio.online): `vercel deploy --prod --yes --scope lopeselios-projects`. `vercel.json` builds with Vite into `dist/`, sends every one-segment path (`/sushi`, `/fogwater`, …) to the app, caches the hashed files in `/assets` forever and revalidates everything else.
+- **Vercel** (project `near-arcade`, live at https://arcade.lopeselio.online): `vercel deploy --prod --yes --scope lopeselios-projects`. `vercel.json` builds with Vite into `dist/`, sends every path except the built files to the app (`/sushi`, `/fogwater`, … open a game; an unknown path shows a not-found page with every game's link), caches the hashed files in `/assets` forever and revalidates everything else.
 - **Azure Storage static website** (mirror): `./deploy.sh` builds and uploads `dist/` (hashed assets immutable, `index.html` no-cache; the 404 page is the app, so deep links work).
 - `./domains.sh records|check|bind` puts the arcade and each game on its lopeselio.online subdomain.
 
@@ -211,12 +212,13 @@ The script needs no keys and no install beyond Node. It prints a summary, e.g. `
 | `src/loaders.ts` | one loader per game: its high-score board, three stats and ticker lines |
 | `src/hooks.ts` | runs the loaders and the balance reads |
 | `src/useGameScreen.ts` | the game screen at `/<slug>`: history, Back, Escape, focus |
-| `src/components/` | Sign, Ticker, TrackBar, Cabinet, LivePanel, CoinBox, ChangeMachine, Footer, GameScreen, Thesis (the /thesis page) |
+| `src/main.tsx` | which page a path gets: the floor, a game over it, /thesis, or the not-found page |
+| `src/components/` | Sign, Ticker, TrackBar, Cabinet, LivePanel, CoinBox, ChangeMachine, Footer, GameScreen, Thesis (the /thesis page), NotFound |
 | `src/styles.css` | the whole look |
 
 ## Add a game
 
-1. Add one entry to `GAMES` in `src/games.ts` (set `light: true` if the glow is bright, `play: 'desktop'` or `'mobile'` only if the other kind of device can't run it, and `tracks` with a one-line note for each track it proves).
+1. Add one entry to `GAMES` in `src/games.ts` (set `light: true` if the glow is bright, `play: 'desktop'` or `'mobile'` only if the other kind of device can't run it, with `playNote` for the reason and `phoneUrl` for a version that does work on a phone, and `tracks` with a one-line note for each track it proves).
 2. Add its loader to `LOADERS` in `src/loaders.ts`, keyed by the slug (the build fails until it exists).
 3. Drop a short animated capture (about 480×300, it is cropped to 16:10) at `public/thumbs/<slug>.webp`.
 
