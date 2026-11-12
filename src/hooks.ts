@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { fmt, readAccount, type AccountState } from './chain';
+import { fmt, readAccount, servedFromCache, type AccountState } from './chain';
 import { GAMES, type Game, type Slug } from './games';
 import { LOADERS, type Panel, type TickerLine } from './loaders';
 
@@ -8,22 +8,52 @@ export const isPhone = matchMedia('(pointer: coarse) and (max-width: 900px)').ma
 /** Reduced motion: the bulbs and the ticker stand still. */
 export const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-export type PanelState = { status: 'ok'; panel: Panel } | { status: 'error' };
+/** `cached`: some or all of it is the last good read, because the chain didn't answer this time. */
+export type PanelState = { status: 'ok'; panel: Panel; cached?: boolean } | { status: 'error' };
+
+/** The last panel each game showed, kept for this browser session. */
+function savedPanel(slug: Slug): Panel | null {
+  try {
+    const raw = sessionStorage.getItem(`arcade:panel:${slug}`);
+    return raw ? (JSON.parse(raw) as Panel) : null;
+  } catch {
+    return null;
+  }
+}
+
+function savePanel(slug: Slug, panel: Panel) {
+  try {
+    sessionStorage.setItem(`arcade:panel:${slug}`, JSON.stringify(panel));
+  } catch {
+    /* blocked or full */
+  }
+}
 
 export type AccountRow = { game: Game; id: string; role: string; contract: boolean } & (
   | ({ missing?: false } & AccountState)
   | { missing: true }
 );
 
-/** Runs every game's loader once. Ticker lines keep the order their loaders answered in. */
+/**
+ * Runs every game's loader once. Ticker lines keep the order their loaders answered in. A loader that
+ * fails shows the panel this session last read, marked cached, rather than an empty board.
+ */
 export function usePanels() {
   const [panels, setPanels] = useState<Partial<Record<Slug, PanelState>>>({});
   useEffect(() => {
     let live = true;
     for (const g of GAMES) {
+      const ids = g.accounts.map(([id]) => id);
       LOADERS[g.slug]().then(
-        (panel) => live && setPanels((p) => ({ ...p, [g.slug]: { status: 'ok', panel } })),
-        () => live && setPanels((p) => ({ ...p, [g.slug]: { status: 'error' } })),
+        (panel) => {
+          const cached = servedFromCache(ids);
+          if (!cached) savePanel(g.slug, panel);
+          if (live) setPanels((p) => ({ ...p, [g.slug]: { status: 'ok', panel, cached } }));
+        },
+        () => {
+          const panel = savedPanel(g.slug);
+          if (live) setPanels((p) => ({ ...p, [g.slug]: panel ? { status: 'ok', panel, cached: true } : { status: 'error' } }));
+        },
       );
     }
     return () => { live = false; };

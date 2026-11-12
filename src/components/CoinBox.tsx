@@ -14,7 +14,10 @@ export function CoinBox({ rows }: { rows: AccountRow[] | null }) {
             <a href={explorer(r.id)} target="_blank" rel="noopener">
               {r.id}
             </a>
-            <em>{r.missing ? 'n/a' : `${fmt(r.balance, 2)} NEAR`}</em>
+            <em>
+              {r.missing ? 'n/a' : `${fmt(r.balance, 2)} NEAR`}
+              {!r.missing && r.cached && <small className="cached" title="Last good read; the chain didn't answer just now">cached</small>}
+            </em>
             <small>{r.contract && !r.missing ? `${r.role}, ${fmt(Math.max(0, r.free), 2)} NEAR free for storage` : r.role}</small>
             {r.contract && !r.missing && r.balance > 0 && (
               <div className="gauge" title="Share of the balance still free for storage">

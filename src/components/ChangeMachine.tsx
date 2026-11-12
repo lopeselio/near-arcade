@@ -53,7 +53,10 @@ export function ChangeMachine({ rows }: { rows: AccountRow[] | null }) {
                   </td>
                   <td className="role">{r.role}</td>
                   <td>{r.game.title}</td>
-                  <td className="num">{r.missing ? 'unavailable' : `${fmt(r.balance, 2)} NEAR`}</td>
+                  <td className="num">
+                    {r.missing ? 'unavailable' : `${fmt(r.balance, 2)} NEAR`}
+                    {!r.missing && r.cached && <small className="cached" title="Last good read; the chain didn't answer just now">cached</small>}
+                  </td>
                   <td className="num">{r.contract && !r.missing ? `${fmt(Math.max(0, r.free), 2)} NEAR` : ''}</td>
                 </tr>
               ))
