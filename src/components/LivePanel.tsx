@@ -6,7 +6,14 @@ export function LivePanel({ state }: { state: PanelState | undefined }) {
   return (
     <>
       <div className="board">
-        <h3>{panel?.title ?? 'High scores'}</h3>
+        <h3>
+          {panel?.title ?? 'High scores'}
+          {state?.status === 'ok' && state.cached && (
+            <small className="cached" title="The chain didn't answer just now; this is the last good read">
+              cached
+            </small>
+          )}
+        </h3>
         <ol>
           {!state ? (
             <li className="empty">Reading the chain…</li>
@@ -24,6 +31,7 @@ export function LivePanel({ state }: { state: PanelState | undefined }) {
             <li className="empty">{panel.empty ?? 'No scores yet.'}</li>
           )}
         </ol>
+        {panel?.note && <p className="board-note">{panel.note}</p>}
       </div>
       <div className="stats">
         {panel?.stats.map(([n, label], i) => (
