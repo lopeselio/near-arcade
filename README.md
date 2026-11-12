@@ -134,10 +134,10 @@ pnpm verify r-mwahfr6v-ab6271 --host https://clawtide.lopeselio.online --rpc htt
 
 ```sh
 git clone https://github.com/lopeselio/inside-job && cd inside-job && pnpm install
-pnpm verify m-mwdiwv95-5ab546 https://inside-job.lopeselio.online
-# ✓ all 8 spends in the audit log match the replay, flags included; every sealed filer opens (5 filed by the Insider)
-# ✓ the Sputnik DAO (dao.inside-job.testnet) holds the same 27 council votes and statuses as the replay
-# ✓ the contract settled it: crew win by ejected, Insider seat 3, 15 credits drained
+pnpm verify m-mw9m9fu0-42d3a6      # fetches the proof from https://inside-job.lopeselio.online by default
+# ✓ all 7 spends in the audit log match the replay, flags included; every sealed filer opens (3 filed by the Insider)
+# ✓ the Sputnik DAO (dao.inside-job.testnet) holds the same 28 council votes and statuses as the replay
+# ✓ the contract settled it: crew win by ejected, Insider seat 4, 21 credits drained
 ```
 
 **defi** (Bazaar of Liars: two agents' signed `token_diff` intents settled together by `execute_intents`; an archival RPC, since the transaction is older than a few days)
