@@ -1,5 +1,5 @@
 {
-  "at": "2026-11-12T12:18:43.845Z",
+  "at": "2026-11-12T13:01:00.089Z",
   "agents": [
     {
       "game": "Sushi Sabotage",
@@ -17,7 +17,7 @@
         "approve_referee",
         "claim_daily"
       ],
-      "allowance": 0.463666
+      "allowance": 0.462742
     },
     {
       "game": "Sushi Sabotage",
@@ -35,7 +35,7 @@
         "approve_referee",
         "claim_daily"
       ],
-      "allowance": 0.471961
+      "allowance": 0.471361
     },
     {
       "game": "Sushi Sabotage",
@@ -53,7 +53,7 @@
         "approve_referee",
         "claim_daily"
       ],
-      "allowance": 0.462365
+      "allowance": 0.461442
     },
     {
       "game": "Sushi Sabotage",
@@ -71,7 +71,7 @@
         "approve_referee",
         "claim_daily"
       ],
-      "allowance": 0.472213
+      "allowance": 0.471612
     },
     {
       "game": "Sushi Sabotage",
@@ -89,7 +89,7 @@
         "approve_referee",
         "claim_daily"
       ],
-      "allowance": 0.412357
+      "allowance": 0.408934
     },
     {
       "game": "Sushi Sabotage",
@@ -228,7 +228,7 @@
         "pay_agent",
         "post_order"
       ],
-      "allowance": 4.583102
+      "allowance": 4.579841
     },
     {
       "game": "Bazaar of Liars",
@@ -244,7 +244,7 @@
         "pay_agent",
         "post_order"
       ],
-      "allowance": 1.746209
+      "allowance": 1.744142
     },
     {
       "game": "Bazaar of Liars",
@@ -260,7 +260,7 @@
         "pay_agent",
         "post_order"
       ],
-      "allowance": 0.792389
+      "allowance": 0.791586
     },
     {
       "game": "Bazaar of Liars",
@@ -276,7 +276,7 @@
         "pay_agent",
         "post_order"
       ],
-      "allowance": 0.816703
+      "allowance": 0.815235
     },
     {
       "game": "Bazaar of Liars",
@@ -292,7 +292,7 @@
         "pay_agent",
         "post_order"
       ],
-      "allowance": 0.856015
+      "allowance": 0.855175
     },
     {
       "game": "Bazaar of Liars",
@@ -349,7 +349,7 @@
         "deliver",
         "settle_job"
       ],
-      "allowance": 0.448544
+      "allowance": 0.445555
     },
     {
       "game": "Realm Ledger",
@@ -370,7 +370,7 @@
         "deliver",
         "settle_job"
       ],
-      "allowance": 0.449997
+      "allowance": 0.446892
     },
     {
       "game": "Realm Ledger",
@@ -496,7 +496,7 @@
         "deliver",
         "settle_job"
       ],
-      "allowance": 0.455671
+      "allowance": 0.452663
     },
     {
       "game": "Realm Ledger",
@@ -517,7 +517,7 @@
         "deliver",
         "settle_job"
       ],
-      "allowance": 0.496003
+      "allowance": 0.495485
     },
     {
       "game": "Realm Ledger",
@@ -601,7 +601,7 @@
         "deliver",
         "settle_job"
       ],
-      "allowance": 0.499799
+      "allowance": 0.499595
     },
     {
       "game": "Parkwright",
@@ -743,7 +743,7 @@
         "approve_fee",
         "offer_to_dark"
       ],
-      "allowance": 0.499797
+      "allowance": 0.499068
     },
     {
       "game": "Emberfall",
@@ -804,7 +804,7 @@
         "commit_vote",
         "act_proposal"
       ],
-      "allowance": 3.986004
+      "allowance": 3.985522
     },
     {
       "game": "Inside Job",
@@ -820,7 +820,7 @@
         "commit_vote",
         "act_proposal"
       ],
-      "allowance": 3.980394
+      "allowance": 3.972904
     },
     {
       "game": "Inside Job",
@@ -836,7 +836,7 @@
         "commit_vote",
         "act_proposal"
       ],
-      "allowance": 3.98265
+      "allowance": 3.973679
     },
     {
       "game": "Inside Job",
@@ -852,7 +852,7 @@
         "commit_vote",
         "act_proposal"
       ],
-      "allowance": 3.979861
+      "allowance": 3.973339
     },
     {
       "game": "Inside Job",
@@ -868,7 +868,7 @@
         "act_proposal",
         "commit_vote"
       ],
-      "allowance": 3.982791
+      "allowance": 3.974699
     },
     {
       "game": "Kraterra",
@@ -960,14 +960,14 @@
     {
       "game": "Sushi Sabotage",
       "id": "sushi-sabotage.testnet",
-      "balance": 7.134269,
-      "storageBytes": 713399
+      "balance": 10.134269,
+      "storageBytes": 714926
     },
     {
       "game": "Bazaar of Liars",
       "id": "v3.bazaar-liars.testnet",
       "balance": 15.058177,
-      "storageBytes": 1267991
+      "storageBytes": 1271757
     },
     {
       "game": "Bazaar of Liars",
@@ -979,37 +979,37 @@
       "game": "Realm Ledger",
       "id": "realm-ledger.testnet",
       "balance": 6.220821,
-      "storageBytes": 394174
+      "storageBytes": 398268
     },
     {
       "game": "Parkwright",
       "id": "park.parkwright.testnet",
       "balance": 2.995045,
-      "storageBytes": 215052
+      "storageBytes": 216114
     },
     {
       "game": "Fogwater",
       "id": "fogwater.testnet",
       "balance": 9.996997,
-      "storageBytes": 198517
+      "storageBytes": 200544
     },
     {
       "game": "Emberfall",
       "id": "emberfall.testnet",
       "balance": 17.83453,
-      "storageBytes": 355043
+      "storageBytes": 357355
     },
     {
       "game": "Inside Job",
       "id": "inside-job.testnet",
       "balance": 5.308447,
-      "storageBytes": 289214
+      "storageBytes": 298745
     },
     {
       "game": "Inside Job",
       "id": "dao.inside-job.testnet",
-      "balance": 2.793717,
-      "storageBytes": 29733
+      "balance": 2.719717,
+      "storageBytes": 41196
     },
     {
       "game": "Kraterra",
@@ -1021,7 +1021,7 @@
       "game": "Clawtide",
       "id": "clawtide.testnet",
       "balance": 5.124386,
-      "storageBytes": 292342
+      "storageBytes": 293724
     }
   ],
   "stats": [
@@ -1045,7 +1045,7 @@
       "key": "bazaar_haggles",
       "kind": "played",
       "label": "haggles committed and revealed",
-      "value": 1733,
+      "value": 1740,
       "game": "Bazaar of Liars",
       "source": "v3.bazaar-liars.testnet stats"
     },
@@ -1085,7 +1085,7 @@
       "key": "realm_campaigns",
       "kind": "played",
       "label": "campaigns on the ledger",
-      "value": 60,
+      "value": 61,
       "game": "Realm Ledger",
       "source": "realm-ledger.testnet get_campaign (probed)"
     },
@@ -1093,7 +1093,7 @@
       "key": "park_days",
       "kind": "played",
       "label": "park-days settled by patron agents",
-      "value": 72,
+      "value": 125,
       "game": "Parkwright",
       "source": "park.parkwright.testnet list_parks"
     },
@@ -1101,7 +1101,7 @@
       "key": "park_parks",
       "kind": "other",
       "label": "parks on chain",
-      "value": 6,
+      "value": 7,
       "game": "Parkwright",
       "source": "park.parkwright.testnet list_parks"
     },
@@ -1117,7 +1117,7 @@
       "key": "fog_games",
       "kind": "played",
       "label": "games created",
-      "value": 8,
+      "value": 13,
       "game": "Fogwater",
       "source": "fogwater.testnet get_config"
     },
@@ -1125,7 +1125,7 @@
       "key": "ember_matches",
       "kind": "played",
       "label": "matches settled",
-      "value": 15,
+      "value": 19,
       "game": "Emberfall",
       "source": "emberfall.testnet ember_supply"
     },
@@ -1133,7 +1133,7 @@
       "key": "ember_minted",
       "kind": "minted",
       "label": "EMBER minted",
-      "value": 727,
+      "value": 878,
       "game": "Emberfall",
       "source": "emberfall.testnet ember_supply"
     },
@@ -1141,7 +1141,7 @@
       "key": "ember_burned",
       "kind": "burned",
       "label": "EMBER burned",
-      "value": 63,
+      "value": 77,
       "game": "Emberfall",
       "source": "emberfall.testnet ember_supply"
     },
@@ -1149,7 +1149,7 @@
       "key": "ember_supply",
       "kind": "supply",
       "label": "EMBER in existence",
-      "value": 664,
+      "value": 801,
       "game": "Emberfall",
       "source": "emberfall.testnet ember_supply"
     },
@@ -1165,7 +1165,7 @@
       "key": "ij_shifts",
       "kind": "played",
       "label": "shifts settled",
-      "value": 9,
+      "value": 13,
       "game": "Inside Job",
       "source": "inside-job.testnet info"
     },
@@ -1173,7 +1173,7 @@
       "key": "ij_proposals",
       "kind": "other",
       "label": "Sputnik DAO spend proposals",
-      "value": 63,
+      "value": 90,
       "game": "Inside Job",
       "source": "dao.inside-job.testnet get_last_proposal_id"
     },
@@ -1197,7 +1197,7 @@
       "key": "claw_rounds",
       "kind": "played",
       "label": "rounds settled this season",
-      "value": 7,
+      "value": 9,
       "game": "Clawtide",
       "source": "clawtide.testnet season_info"
     },
@@ -1213,7 +1213,7 @@
       "key": "claw_pearl",
       "kind": "supply",
       "label": "PEARL in existence (no burn rule)",
-      "value": 204,
+      "value": 262,
       "game": "Clawtide",
       "source": "clawtide.testnet season_info"
     }
