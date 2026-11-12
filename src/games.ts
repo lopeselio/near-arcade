@@ -23,6 +23,10 @@ export interface Game {
   blurb: string;
   accounts: readonly Account[];
   play?: Play;
+  /** Why the plate says what it does (its tooltip and the wrong-device warning), when the generic reason isn't right. */
+  playNote?: string;
+  /** A version of the game that does work on a phone, linked from the warning there. */
+  phoneUrl?: string;
   /** Hackathon tracks this game proves, each with a one-line note on where to look (shown when that track chip is on). */
   tracks: Partial<Record<TrackId, string>>;
 }
@@ -44,6 +48,9 @@ export const GAMES = [
   },
   { title: 'Bazaar of Liars', slug: 'bazaar', glow: '#ffc53d', light: true, badge: 'solo, in a walkable New York', thumb: '/thumbs/bazaar.webp',
     url: 'https://bazaar.lopeselio.online/', repo: 'https://github.com/lopeselio/bazaar-of-liars',
+    play: 'desktop',
+    playNote: 'The walkable city’s haggle and trade prompts need a keyboard. On a phone, the classic desert bazaar plays by touch.',
+    phoneUrl: 'https://bazaar.lopeselio.online/?classic',
     blurb: 'Haggle with AI merchants who bluff. Read their tells, call their lies, buy low and sell high; the chain proves every bluff was fair.',
     accounts: [['v3.bazaar-liars.testnet', 'Game contract', true], ['bazaar-server.testnet', 'Game server'], ['bazaar-intents.testnet', 'NEAR Intents verifier', true], ['bazaar-funds-1108.testnet', 'Pays the agents’ gas']],
     tracks: {

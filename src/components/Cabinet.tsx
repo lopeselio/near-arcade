@@ -17,10 +17,13 @@ interface Props {
 /** One game on the floor: marquee, device plate, CRT screen, control deck, blurb, live board, coin box. */
 export function Cabinet({ game: g, panel, accounts, onPlay, track }: Props) {
   const play = () => onPlay(g);
-  const [label, tip, icon] = PLATES[g.play ?? 'any'];
+  const [label, genericTip, icon] = PLATES[g.play ?? 'any'];
+  const tip = g.playNote ? `${genericTip.split(':')[0]}. ${g.playNote}` : genericTip;
   const warning =
     g.play === 'desktop' && isPhone
-      ? 'Full-size cabinet: this one needs a desktop. Bookmark it for the big screen, or press Insert coin anyway.'
+      ? g.playNote
+        ? `Full-size cabinet. ${g.playNote}`
+        : 'Full-size cabinet: this one needs a desktop. Bookmark it for the big screen, or press Insert coin anyway.'
       : g.play === 'mobile' && !isPhone
         ? 'Pocket cabinet: built for a phone. Open it on your phone, or press Insert coin anyway.'
         : null;
@@ -41,7 +44,19 @@ export function Cabinet({ game: g, panel, accounts, onPlay, track }: Props) {
           <b>{TRACKS.find((t) => t.id === track)?.label}</b> {proof}
         </p>
       )}
-      {warning && <p className="warn">{warning}</p>}
+      {warning && (
+        <p className="warn">
+          {warning}
+          {g.phoneUrl && g.play === 'desktop' && (
+            <>
+              {' '}
+              <a href={g.phoneUrl} target="_blank" rel="noopener">
+                Open the phone version
+              </a>
+            </>
+          )}
+        </p>
+      )}
       <div className="bezel">
         <div className="crt">
           <img src={g.thumb} alt={`${g.title} in play`} loading="lazy" width={480} height={300} />
