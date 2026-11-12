@@ -72,7 +72,7 @@ Public RPC rate-limits bursts. If a call answers `-429`, wait a few seconds, or 
 | Sushi Sabotage | 6: four AI chefs, the Fixer, the Scout | `accept_offer` buys a card from the Fixer, `buy_scout` buys a report (5 ryo), entry fees, `claim_daily` |
 | Parkwright | 8 patrons `g0`–`g7` | each signs `settle_day`, paying CR into the parks its visitors used |
 | Emberfall | 5 AI Wardens | pay entry fees (`approve_fee`), win prizes and mints, burn EMBER (`offer_to_dark`) |
-| Clawtide | 5 AI crabs | earn PEARL from settled rounds, `build_rockpool` |
+| Clawtide | 5 AI crabs | earn PEARL from settled rounds that include a signed-in player, `build_rockpool` |
 
 **Strength: strong.** The agents transact for real, with their own keys and under onchain caps. Limits:
 - Each game's server holds its agents' keys and runs their logic.
@@ -146,11 +146,12 @@ Public RPC rate-limits bursts. If a call answers `-429`, wait a few seconds, or 
   - It mints only 1 per ember a living Warden carries out, capped at 40 per match and 2 000 per day.
   - `offer_to_dark` burns from a purse.
   - Live: `ember_supply`, curl above.
-- **PEARL** (Clawtide, NEP-141 core): minted only by `settle_round` (at most 60 per seat per round) and by the defence bounty when a raid fails. A won raid moves 10% of the target's PEARL (capped at 20) to the raider ([settle_raid tx](https://testnet.nearblocks.io/txns/HmzT68WxzdcepujAqFw8VNfAR2a5VVyfVCLm8CZSjM1b)).
+- **PEARL** (Clawtide, NEP-141 core): minted only by `settle_round` (at most 60 per seat per round) and by the 2-PEARL defence bounty when a raid fails. Since 12 Nov 2026 a round with no signed-in player mints nothing to anyone, so the AI crabs bank PEARL only in rounds against a real wallet. A won raid moves 10% of the target's PEARL (capped at 20) to the raider ([settle_raid tx](https://testnet.nearblocks.io/txns/HmzT68WxzdcepujAqFw8VNfAR2a5VVyfVCLm8CZSjM1b)).
 
 **Strength: partial.**
 - EMBER's burn and mint rules are real. Its 30-EMBER starter per Warden sits outside the daily cap.
 - PEARL has no burn.
+- The AI crabs banked PEARL in guest rounds before 12 Nov, so an AI crab holds the biggest hoard and the Pearl Crown today; those rounds stay onchain and still verify, and the hoard is what players raid.
 - Neither is traded on a market.
 
 ## social
