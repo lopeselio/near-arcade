@@ -4,6 +4,12 @@ One page that launches our NEAR HACKATHON games (Sushi Sabotage, Bazaar of Liars
 
 The page reads everything live from NEAR testnet in the browser (public RPC, no keys, no server): each game's high scores and stats from its contract's views, and the balance of every game account (contracts also show how much of their balance is still free for storage). The cabinet screens are short animated captures in `public/thumbs/`. A plate under each marquee says where it plays: **Pocket + Cabinet** (phone touch controls and desktop), or **Cabinet only** / **Pocket only** for a game that needs a desktop or a phone (a game's `play` field); on the wrong kind of device that cabinet also carries a short warning.
 
+## The problem
+
+Onchain games usually show the chain to the player (wallet pop-ups, gas, seed phrases) while hiding the parts players would actually want proven: what an opponent's hidden move was, whether the board was rigged, whether an AI rival or the server cheated. And their in-game economies rarely do anything on their own.
+
+These nine games flip that. Players start as guests with no wallet; the chain works underneath them. Hidden moves, secret rolls and boards are committed onchain before play and opened afterwards, so anyone can check them with a `pnpm verify` command. AI rivals hold their own NEAR accounts with capped spending, and the games' NFTs and tokens carry real balances and rules. This page puts them in one place and reads their state live from NEAR testnet.
+
 ## Try it (do X, see Y)
 
 1. Open **https://arcade.lopeselio.online**. You see nine cabinets; each one's high scores, stats and NEAR accounts are read live from testnet in your browser.
