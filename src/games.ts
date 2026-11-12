@@ -48,9 +48,7 @@ export const GAMES = [
   },
   { title: 'Bazaar of Liars', slug: 'bazaar', glow: '#ffc53d', light: true, badge: 'solo, in a walkable New York', thumb: '/thumbs/bazaar.webp',
     url: 'https://bazaar.lopeselio.online/', repo: 'https://github.com/lopeselio/bazaar-of-liars',
-    play: 'desktop',
-    playNote: 'The walkable city’s haggle and trade prompts need a keyboard. On a phone, the classic desert bazaar plays by touch.',
-    phoneUrl: 'https://bazaar.lopeselio.online/?classic',
+    playNote: 'The walkable city needs a WebGPU browser; one without it (many phones) gets the classic desert bazaar automatically.',
     blurb: 'Haggle with AI merchants who bluff. Read their tells, call their lies, buy low and sell high; the chain proves every bluff was fair.',
     accounts: [['v3.bazaar-liars.testnet', 'Game contract', true], ['bazaar-server.testnet', 'Game server'], ['bazaar-intents.testnet', 'NEAR Intents verifier', true], ['bazaar-funds-1108.testnet', 'Pays the agents’ gas']],
     tracks: {
@@ -143,8 +141,8 @@ export const GAMES = [
     tracks: {
       games: 'Minesweeper royale for up to 4 crabs; boards from NEAR’s block randomness; guests play gasless.',
       privacy: 'Every hop is sealed per 3 s chunk and opened at the end; rockpool layouts are committed and revealed after a raid.',
-      agents: 'Partial: five AI crabs earn PEARL from settled rounds and build rockpools with a key scoped to build_rockpool.',
-      memecoins: 'PEARL (NEP-141): minted only by settled rounds (max 60 per seat), moved only by raids on rockpools; no other mint.',
+      agents: 'Partial: five AI crabs earn PEARL from settled rounds against signed-in players and build rockpools with a key scoped to build_rockpool.',
+      memecoins: 'PEARL (NEP-141): minted only by settled rounds with a signed-in player (max 60 per seat; guest rounds mint nothing), moved by raids; an AI crab holds the crown from earlier guest rounds.',
       thesis: 'Feeds /thesis: 5 agent accounts, rounds settled, raids, PEARL supply.',
     },
   },
