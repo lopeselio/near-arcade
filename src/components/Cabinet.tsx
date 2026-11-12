@@ -1,5 +1,6 @@
 import type { CSSProperties } from 'react';
 import { PLATES, type Game } from '../games';
+import { TRACKS, type TrackId } from '../tracks';
 import { isPhone, type AccountRow, type PanelState } from '../hooks';
 import { CoinBox } from './CoinBox';
 import { LivePanel } from './LivePanel';
@@ -9,10 +10,12 @@ interface Props {
   panel: PanelState | undefined;
   accounts: AccountRow[] | null;
   onPlay: (g: Game) => void;
+  /** The selected track chip: the cabinet lights up with its evidence note, or dims if it doesn't prove that track. */
+  track: TrackId | null;
 }
 
 /** One game on the floor: marquee, device plate, CRT screen, control deck, blurb, live board, coin box. */
-export function Cabinet({ game: g, panel, accounts, onPlay }: Props) {
+export function Cabinet({ game: g, panel, accounts, onPlay, track }: Props) {
   const play = () => onPlay(g);
   const [label, tip, icon] = PLATES[g.play ?? 'any'];
   const warning =
@@ -21,9 +24,11 @@ export function Cabinet({ game: g, panel, accounts, onPlay }: Props) {
       : g.play === 'mobile' && !isPhone
         ? 'Pocket cabinet: built for a phone. Open it on your phone, or press Insert coin anyway.'
         : null;
+  const proof = track ? (g.tracks as Partial<Record<TrackId, string>>)[track] : undefined;
+  const lit = track ? (proof ? ' lit' : ' unlit') : '';
   return (
     // light: dark marquee text where the glow is bright
-    <article className={`cab${g.light ? ' light' : ''}`} id={`cab-${g.slug}`} style={{ '--glow': g.glow } as CSSProperties}>
+    <article className={`cab${g.light ? ' light' : ''}${lit}`} id={`cab-${g.slug}`} style={{ '--glow': g.glow } as CSSProperties}>
       <header className="marquee">
         <h2>{g.title}</h2>
         <small>{g.badge}</small>
@@ -31,6 +36,11 @@ export function Cabinet({ game: g, panel, accounts, onPlay }: Props) {
           {`${icon} ${label}`}
         </span>
       </header>
+      {proof && (
+        <p className="proof">
+          <b>{TRACKS.find((t) => t.id === track)?.label}</b> {proof}
+        </p>
+      )}
       {warning && <p className="warn">{warning}</p>}
       <div className="bezel">
         <div className="crt">
