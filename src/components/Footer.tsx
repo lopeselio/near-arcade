@@ -4,6 +4,9 @@ export function Footer() {
   return (
     <footer>
       <p>Each game is its own project with its own repo, contract and server; this page only links to them. Testnet only.</p>
+      <p>
+        <a href="/thesis">The thesis</a>: why AI agents running game economies are demand for NEAR, with every number read live from these contracts.
+      </p>
       <ul id="repos">
         {GAMES.map((g) => (
           <li key={g.slug}>
