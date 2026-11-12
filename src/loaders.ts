@@ -115,8 +115,9 @@ export const LOADERS: Record<Slug, () => Promise<Panel>> = {
     }
     const audit = await view('park.parkwright.testnet', 'audit');
     // claim tests and end-to-end parks are ours, not players'
-    const testParks = parks.filter((p) => isTestAccount(p.owner) || isTestAccount(p.name)).length;
-    const claimed = parks.filter((p) => p.owner !== 'parkwright.testnet' && !isTestAccount(p.owner) && !isTestAccount(p.name));
+    const anyClaimed = parks.filter((p) => p.owner !== 'parkwright.testnet');
+    const claimed = anyClaimed.filter((p) => !isTestAccount(p.owner) && !isTestAccount(p.name));
+    const testParks = anyClaimed.length - claimed.length;
     const settled = parks.reduce((a, p) => a + Number(p.earned), 0) / 100;
     const rows = claimed
       .filter((p) => Number(p.earned) > 0)
