@@ -194,8 +194,8 @@ export const LOADERS: Record<Slug, () => Promise<Panel>> = {
       rows: rows.map(([id, s]: [string, any]) => [id === 'basalt.kraterra.testnet' ? 'Basalt (AI)' : who(id), `${s.wins}W ${s.losses}L · best ${s.best}`]),
       empty: 'No duels settled yet. Fire the first shot.',
       note: board.note,
-      stats: [[fmt(cfg[2]), 'duels on the chain'], [fmt(packs), 'munition pack NFTs'], [fmt(dmg), 'damage by the top gunners']],
-      ticker: [t(fmt(cfg[2]), 'artillery duels recorded in Kraterra')],
+      stats: [[fmt(cfg[2]), 'duels started on the chain'], [fmt(packs), 'munition pack NFTs'], [fmt(dmg), 'damage by the top gunners']],
+      ticker: [t(fmt(cfg[2]), 'artillery duels started on NEAR in Kraterra')],
     };
   },
 
