@@ -1,25 +1,25 @@
 game,key,kind,label,value,source,read_at
-Sushi Sabotage,sushi_nfts,nfts,chef and recipe-scroll NFTs,31,sushi-sabotage.testnet nft_total_supply,2026-11-12T12:18:43.845Z
-Sushi Sabotage,sushi_treasury,other,NEAR paid by players for energy and gear,0.2,sushi-sabotage.testnet get_economy,2026-11-12T12:18:43.845Z
-Bazaar of Liars,bazaar_haggles,played,haggles committed and revealed,1733,v3.bazaar-liars.testnet stats,2026-11-12T12:18:43.845Z
-Bazaar of Liars,bazaar_unrevealed,other,haggles never revealed,0,v3.bazaar-liars.testnet stats,2026-11-12T12:18:43.845Z
-Bazaar of Liars,bazaar_deliveries,other,customer orders delivered,4,v3.bazaar-liars.testnet stats,2026-11-12T12:18:43.845Z
-Bazaar of Liars,bazaar_burned,burned,"coins burned (licences, commission)",3823,v3.bazaar-liars.testnet stats,2026-11-12T12:18:43.845Z
-Bazaar of Liars,bazaar_deeds,nfts,stall deed NFTs,1,v3.bazaar-liars.testnet nft_total_supply,2026-11-12T12:18:43.845Z
-Realm Ledger,realm_campaigns,played,campaigns on the ledger,60,realm-ledger.testnet get_campaign (probed),2026-11-12T12:18:43.845Z
-Parkwright,park_days,played,park-days settled by patron agents,72,park.parkwright.testnet list_parks,2026-11-12T12:18:43.845Z
-Parkwright,park_parks,other,parks on chain,6,park.parkwright.testnet list_parks,2026-11-12T12:18:43.845Z
-Parkwright,park_cr,supply,CR (NEP-141) in circulation,320000,park.parkwright.testnet audit,2026-11-12T12:18:43.845Z
-Fogwater,fog_games,played,games created,8,fogwater.testnet get_config,2026-11-12T12:18:43.845Z
-Emberfall,ember_matches,played,matches settled,15,emberfall.testnet ember_supply,2026-11-12T12:18:43.845Z
-Emberfall,ember_minted,minted,EMBER minted,727,emberfall.testnet ember_supply,2026-11-12T12:18:43.845Z
-Emberfall,ember_burned,burned,EMBER burned,63,emberfall.testnet ember_supply,2026-11-12T12:18:43.845Z
-Emberfall,ember_supply,supply,EMBER in existence,664,emberfall.testnet ember_supply,2026-11-12T12:18:43.845Z
-Emberfall,ember_wardens,nfts,Warden NFTs,15,emberfall.testnet nft_total_supply,2026-11-12T12:18:43.845Z
-Inside Job,ij_shifts,played,shifts settled,9,inside-job.testnet info,2026-11-12T12:18:43.845Z
-Inside Job,ij_proposals,other,Sputnik DAO spend proposals,63,dao.inside-job.testnet get_last_proposal_id,2026-11-12T12:18:43.845Z
-Kraterra,krat_duels,played,duels created,11,kraterra.testnet get_config,2026-11-12T12:18:43.845Z
-Kraterra,krat_packs,nfts,munition-pack NFTs,3,kraterra.testnet nft_total_supply,2026-11-12T12:18:43.845Z
-Clawtide,claw_rounds,played,rounds settled this season,7,clawtide.testnet season_info,2026-11-12T12:18:43.845Z
-Clawtide,claw_raids,other,rockpool raids this season,2,clawtide.testnet season_info,2026-11-12T12:18:43.845Z
-Clawtide,claw_pearl,supply,PEARL in existence (no burn rule),204,clawtide.testnet season_info,2026-11-12T12:18:43.845Z
+Sushi Sabotage,sushi_nfts,nfts,chef and recipe-scroll NFTs,31,sushi-sabotage.testnet nft_total_supply,2026-11-12T13:01:00.089Z
+Sushi Sabotage,sushi_treasury,other,NEAR paid by players for energy and gear,0.2,sushi-sabotage.testnet get_economy,2026-11-12T13:01:00.089Z
+Bazaar of Liars,bazaar_haggles,played,haggles committed and revealed,1740,v3.bazaar-liars.testnet stats,2026-11-12T13:01:00.089Z
+Bazaar of Liars,bazaar_unrevealed,other,haggles never revealed,0,v3.bazaar-liars.testnet stats,2026-11-12T13:01:00.089Z
+Bazaar of Liars,bazaar_deliveries,other,customer orders delivered,4,v3.bazaar-liars.testnet stats,2026-11-12T13:01:00.089Z
+Bazaar of Liars,bazaar_burned,burned,"coins burned (licences, commission)",3823,v3.bazaar-liars.testnet stats,2026-11-12T13:01:00.089Z
+Bazaar of Liars,bazaar_deeds,nfts,stall deed NFTs,1,v3.bazaar-liars.testnet nft_total_supply,2026-11-12T13:01:00.089Z
+Realm Ledger,realm_campaigns,played,campaigns on the ledger,61,realm-ledger.testnet get_campaign (probed),2026-11-12T13:01:00.089Z
+Parkwright,park_days,played,park-days settled by patron agents,125,park.parkwright.testnet list_parks,2026-11-12T13:01:00.089Z
+Parkwright,park_parks,other,parks on chain,7,park.parkwright.testnet list_parks,2026-11-12T13:01:00.089Z
+Parkwright,park_cr,supply,CR (NEP-141) in circulation,320000,park.parkwright.testnet audit,2026-11-12T13:01:00.089Z
+Fogwater,fog_games,played,games created,13,fogwater.testnet get_config,2026-11-12T13:01:00.089Z
+Emberfall,ember_matches,played,matches settled,19,emberfall.testnet ember_supply,2026-11-12T13:01:00.089Z
+Emberfall,ember_minted,minted,EMBER minted,878,emberfall.testnet ember_supply,2026-11-12T13:01:00.089Z
+Emberfall,ember_burned,burned,EMBER burned,77,emberfall.testnet ember_supply,2026-11-12T13:01:00.089Z
+Emberfall,ember_supply,supply,EMBER in existence,801,emberfall.testnet ember_supply,2026-11-12T13:01:00.089Z
+Emberfall,ember_wardens,nfts,Warden NFTs,15,emberfall.testnet nft_total_supply,2026-11-12T13:01:00.089Z
+Inside Job,ij_shifts,played,shifts settled,13,inside-job.testnet info,2026-11-12T13:01:00.089Z
+Inside Job,ij_proposals,other,Sputnik DAO spend proposals,90,dao.inside-job.testnet get_last_proposal_id,2026-11-12T13:01:00.089Z
+Kraterra,krat_duels,played,duels created,11,kraterra.testnet get_config,2026-11-12T13:01:00.089Z
+Kraterra,krat_packs,nfts,munition-pack NFTs,3,kraterra.testnet nft_total_supply,2026-11-12T13:01:00.089Z
+Clawtide,claw_rounds,played,rounds settled this season,9,clawtide.testnet season_info,2026-11-12T13:01:00.089Z
+Clawtide,claw_raids,other,rockpool raids this season,2,clawtide.testnet season_info,2026-11-12T13:01:00.089Z
+Clawtide,claw_pearl,supply,PEARL in existence (no burn rule),262,clawtide.testnet season_info,2026-11-12T13:01:00.089Z
