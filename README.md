@@ -29,7 +29,7 @@ These nine games flip that. Players start as guests with no wallet; the chain wo
 ## Try it (do X, see Y)
 
 1. Open **https://arcade.lopeselio.online**. You see nine cabinets; each one's high scores, stats and NEAR accounts are read live from testnet in your browser.
-2. Press **Insert coin** on any cabinet: the game opens in the page at its own path (e.g. `/fogwater`); **Escape** or **Back** returns to the floor. **Open in a new tab** plays it full screen (wallet sign-in works best there). Every plate reads **Pocket + Cabinet** except Bazaar of Liars, **Cabinet only**: its walkable city's haggle and trade prompts need a keyboard; on a phone its cabinet links the classic desert bazaar (`bazaar.lopeselio.online/?classic`), which plays by touch.
+2. Press **Insert coin** on any cabinet: the game opens in the page at its own path (e.g. `/fogwater`); **Escape** or **Back** returns to the floor. **Open in a new tab** plays it full screen (wallet sign-in works best there). Every plate reads **Pocket + Cabinet**: all nine play by touch on a phone. Hover Bazaar of Liars' plate: its walkable city needs a WebGPU browser, and a browser without it (many phones) gets the classic desert bazaar automatically (`bazaar.lopeselio.online/?classic` opens it anywhere).
 3. Every game plays as a guest with no wallet; **Sign in with NEAR** (any testnet wallet) to be ranked and to own NFTs.
 4. Press a **track chip** under the ticker (e.g. **Privacy**): the cabinets that prove it light up, each with a note naming the contract method to look at, and the rest dim. The address bar shows `?track=privacy`; press the chip again to clear it.
 5. Open **https://arcade.lopeselio.online/thesis**: the numbers first show a dimmed snapshot, then turn bright as live reads arrive (about 10–30 s on public RPC). Open **Every agent account and what its keys may do**: each one has only function-call keys.
@@ -48,7 +48,7 @@ We list a track only where a game shows it working on testnet. **[TRACKS.md](TRA
 | **nfts**: NFTs That Do Something | Sushi Sabotage, Emberfall, Bazaar of Liars, Kraterra | Chef and Warden NFTs hold their own purse, inventory and record (transfer the NFT, the money goes with it). Recipe scrolls earn royalties. Stall deeds hold stock and a till and get an ETH-signed certificate via Chain Signatures. Munition packs gate weapons | strong (Kraterra partial) |
 | **security**: AI Security & Defense | Inside Job, Bazaar of Liars, Sushi Sabotage, Realm Ledger, Emberfall, Parkwright | Every agent holds only function-call keys scoped to one contract, with onchain spend caps. Inside Job adds a spend policy and audit log that flag lookalike payees, new payees and bursts | strong |
 | **swarms**: AI Swarms | Bazaar of Liars, Realm Ledger, Sushi Sabotage | Many agents in one market: sealed-bid cargo auctions, paid orders, hiring, treaties, barter through NEAR Intents | partial (Bazaar is the real one) |
-| **memecoins**: Memecoins With Mechanics | Emberfall, Clawtide | EMBER: 15% of a pot burns per fallen Warden, and it mints only for embers carried out (40/match, 2 000/day). PEARL: minted only by settled rounds, moved by raids | partial |
+| **memecoins**: Memecoins With Mechanics | Emberfall, Clawtide | EMBER: 15% of a pot burns per fallen Warden, and it mints only for embers carried out (40/match, 2 000/day). PEARL: minted only by settled rounds with a signed-in player (guest rounds mint nothing), moved by raids | partial |
 | **social**: Social Money | Inside Job | The match treasury is a real Sputnik DAO: only the game contract may propose spends, only the five council desks vote, more than half approves | partial (one game) |
 | **defi**: Unstoppable DeFi | Bazaar of Liars | Agents barter NEP-245 goods with signed `token_diff` intents through our own testnet deploy of the NEAR Intents verifier | partial (no official Intents testnet) |
 | **thesis**: Thesis | [/thesis](https://arcade.lopeselio.online/thesis) | A live data page and a written case that AI agents running game economies are long-term demand for NEAR; `node scripts/thesis-data.mjs` re-runs every number | partial (testnet scale) |
@@ -120,7 +120,7 @@ curl -s https://near-testnet.drpc.org -H 'content-type: application/json' -d '{"
 # 13 agent accounts in one market
 ```
 
-**memecoins** (Clawtide: PEARL minted only by a settled round, which the verifier replays from the opened log)
+**memecoins** (Clawtide: PEARL minted only by a settled round, which the verifier replays from the opened log. This is an earlier round; since 12 Nov guest-only rounds mint nothing)
 
 ```sh
 git clone https://github.com/lopeselio/clawtide && cd clawtide && pnpm install
