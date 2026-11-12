@@ -19,7 +19,8 @@ export function useGameScreen() {
 
   const open = useCallback(
     (g: Game) => {
-      history.pushState({ slug: g.slug }, '', `/${g.slug}`);
+      // the query (?track=…) rides along, so the floor comes back as it was
+      history.pushState({ slug: g.slug }, '', `/${g.slug}${location.search}`);
       show(g);
     },
     [show],
@@ -29,7 +30,7 @@ export function useGameScreen() {
     // Opened from the floor: step back so the browser's Forward reopens it. Arrived by deep link: just go to /.
     if (history.state?.slug) history.back();
     else {
-      history.replaceState(null, '', '/');
+      history.replaceState(null, '', `/${location.search}`);
       show(null);
     }
   }, [show]);
