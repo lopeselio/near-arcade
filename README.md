@@ -16,7 +16,7 @@
 
 ## The arcade page
 
-The page reads everything live from NEAR testnet in the browser (public RPC, no keys, no server): each game's high scores and stats from its contract's views, and the balance of every game account (contracts also show how much of their balance is still free for storage). The cabinet screens are short animated captures in `public/thumbs/`. A plate under each marquee says where it plays: **Pocket + Cabinet** (phone touch controls and desktop), or **Cabinet only** / **Pocket only** for a game that needs a desktop or a phone (a game's `play` field); on the wrong kind of device that cabinet also carries a short warning.
+The page reads everything live from NEAR testnet in the browser (public RPC, no keys, no server): each game's high scores and stats from its contract's views, and the balance of every game account (contracts also show how much of their balance is still free for storage). It rotates across five public testnet RPCs from [docs.near.org's provider list](https://docs.near.org/api/rpc/providers), benches one that rate-limits, backs off and retries, and keeps the last good answer for each read in the browser session, so a busy network shows a slightly older number marked *cached* rather than a blank panel. Leaderboards leave out our own test players (`E2E …`, `e2e-…`, `claimtest-…`) and say under the board how many were hidden. The cabinet screens are short animated captures in `public/thumbs/`. A plate under each marquee says where it plays: **Pocket + Cabinet** (phone touch controls and desktop), or **Cabinet only** / **Pocket only** for a game that needs a desktop or a phone (a game's `play` field); on the wrong kind of device that cabinet also carries a short warning.
 
 A row of **track chips** lights up the cabinets that prove each hackathon track, with a one-line note on where to look (`?track=privacy` links straight to it). **[/thesis](https://arcade.lopeselio.online/thesis)** is a live data page: 57 agent accounts and their key permissions, play recorded, tokens minted and burned, NFTs and contract storage, all read from the nine contracts, plus the written case for why agent-run game economies are demand for NEAR. The evidence for every track is in **[TRACKS.md](TRACKS.md)**.
 
@@ -187,7 +187,7 @@ pnpm install
 pnpm dev        # http://localhost:5173, live data from testnet
 pnpm build      # typecheck, then the static site in dist/
 pnpm preview    # serves dist/ at http://localhost:8891 (try /fogwater: the game opens over the floor; /thesis; /?track=agents)
-node scripts/thesis-data.mjs   # Node 22.18+: re-reads the /thesis numbers, writes data/thesis.json and data/thesis-{stats,agents,contracts}.csv
+node scripts/thesis-data.mjs   # Node 22.18+: re-reads the /thesis numbers, writes data/thesis.json and data/thesis-{stats,agents,contracts}.csv (--rpc URL to try one RPC first)
 ```
 
 The script needs no keys and no install beyond Node. It prints a summary, e.g. `agent accounts: 57 in 8 games; function-call keys only: 57`. Reads that public RPC drops after retries are listed as failed and left out.
@@ -207,7 +207,7 @@ The script needs no keys and no install beyond Node. It prints a summary, e.g. `
 | `src/thesis.ts` | the /thesis collector: agent keys, contract storage, per-game counts (shared with `scripts/thesis-data.mjs`) |
 | `data/` | the last snapshot of those numbers (JSON and CSV); the page shows it until live reads arrive |
 | `TRACKS.md` | the evidence for each claimed track |
-| `src/chain.ts` | NEAR testnet reads: RPC failover with backoff, contract views, account balances, access keys |
+| `src/chain.ts` | NEAR testnet reads: RPC rotation with backoff, the last-good cache, contract views, account balances, access keys |
 | `src/loaders.ts` | one loader per game: its high-score board, three stats and ticker lines |
 | `src/hooks.ts` | runs the loaders and the balance reads |
 | `src/useGameScreen.ts` | the game screen at `/<slug>`: history, Back, Escape, focus |
