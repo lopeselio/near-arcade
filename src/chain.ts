@@ -73,7 +73,8 @@ async function rpc<T>(params: QueryParams): Promise<T> {
   let last: unknown;
   for (let round = 0; round < 4; round++) {
     if (round) await sleep(500 * 2 ** round + Math.random() * 400);
-    const start = turn++ % RPCS.length;
+    // an explicit NEAR_RPC_URL is always tried first; otherwise start from the next provider in turn
+    const start = env?.NEAR_RPC_URL ? 0 : turn++ % RPCS.length;
     const order = RPCS.map((_, i) => RPCS[(start + i) % RPCS.length]);
     const now = Date.now();
     const ready = order.filter((u) => (bench.get(u)?.until ?? 0) <= now);
