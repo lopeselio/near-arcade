@@ -42,6 +42,25 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .ticker li b { color: var(--amber); font-weight: 400; text-shadow: 0 0 8px rgba(255, 199, 90, .8); }
 @keyframes scroll { to { transform: translateX(-50%); } }
 
+/* ── track chips: light the cabinets that prove a hackathon track ── */
+.tracks { margin: 30px auto 0; max-width: 980px; text-align: center; }
+.tracks h2 { margin: 0 0 10px; font: 700 13px/1 'Chakra Petch', sans-serif; letter-spacing: .18em; text-transform: uppercase; color: var(--dim); }
+.chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.chip { font: 700 13px/1 'Chakra Petch', sans-serif; letter-spacing: .06em; text-transform: uppercase; color: var(--ink); cursor: pointer;
+  min-height: 34px; padding: 8px 13px; border-radius: 999px; border: 0; background: rgba(0, 0, 0, .4); box-shadow: inset 0 0 0 1px rgba(60, 242, 255, .4); }
+.chip:hover { box-shadow: inset 0 0 0 1px var(--cyan), 0 0 12px rgba(60, 242, 255, .35); }
+.chip[aria-pressed='true'] { color: #160b26; background: var(--cyan); box-shadow: 0 0 0 1px var(--cyan), 0 0 18px rgba(60, 242, 255, .7); }
+.track-note { margin: 12px auto 0; max-width: 72ch; min-height: 3em; color: var(--dim); font-size: 14.5px; }
+.track-note b { color: var(--cyan); }
+.track-note a { font-weight: 700; margin-left: 4px; }
+.cab { transition: opacity .25s, filter .25s, box-shadow .25s; }
+.cab.unlit { opacity: .38; filter: saturate(.35); }
+.cab.unlit:hover, .cab.unlit:focus-within { opacity: .8; filter: none; }
+.cab.lit { box-shadow: inset 0 0 0 2px var(--glow), 0 0 34px color-mix(in srgb, var(--glow) 45%, transparent), 0 26px 50px rgba(0, 0, 0, .55); }
+.proof { margin: 8px 12px 0; padding: 8px 10px; border-radius: 8px; font-size: 13.5px; line-height: 1.4; color: var(--ink);
+  background: rgba(0, 0, 0, .45); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--glow) 70%, transparent); }
+.proof b { display: block; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--glow); }
+
 /* ── the floor: one cabinet per game ─────────────────────── */
 .floor { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(290px, 100%), 360px)); justify-content: center; gap: 30px 26px; margin: 46px 0 0; }
 .cab { --glow: var(--cyan); position: relative; display: flex; flex-direction: column; border-radius: 20px 20px 10px 10px;
@@ -150,4 +169,4 @@ footer .heart { color: #ff5c8a; display: inline-block; animation: beat 1.6s ease
   .sign { margin-top: 18px; } .ticker ul { font-size: 24px; } #screen nav small { display: none; }
   td.role, th.role { display: none; }
 }
-@media (prefers-reduced-motion: reduce) { .bulbs, .ticker ul { animation: none; } .ticker ul { width: auto; flex-wrap: wrap; gap: 6px 28px; padding: 8px 12px; } }
+@media (prefers-reduced-motion: reduce) { .cab { transition: none; } .bulbs, .ticker ul { animation: none; } .ticker ul { width: auto; flex-wrap: wrap; gap: 6px 28px; padding: 8px 12px; } }
