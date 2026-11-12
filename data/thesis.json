@@ -1,0 +1,1222 @@
+{
+  "at": "2026-11-12T12:18:43.845Z",
+  "agents": [
+    {
+      "game": "Sushi Sabotage",
+      "id": "kenji.sushi-sabotage.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 1,
+      "receivers": [
+        "sushi-sabotage.testnet"
+      ],
+      "methods": [
+        "post_offer",
+        "accept_offer",
+        "buy_scout",
+        "approve_referee",
+        "claim_daily"
+      ],
+      "allowance": 0.463666
+    },
+    {
+      "game": "Sushi Sabotage",
+      "id": "mei.sushi-sabotage.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 1,
+      "receivers": [
+        "sushi-sabotage.testnet"
+      ],
+      "methods": [
+        "post_offer",
+        "accept_offer",
+        "buy_scout",
+        "approve_referee",
+        "claim_daily"
+      ],
+      "allowance": 0.471961
+    },
+    {
+      "game": "Sushi Sabotage",
+      "id": "hana.sushi-sabotage.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 1,
+      "receivers": [
+        "sushi-sabotage.testnet"
+      ],
+      "methods": [
+        "post_offer",
+        "accept_offer",
+        "buy_scout",
+        "approve_referee",
+        "claim_daily"
+      ],
+      "allowance": 0.462365
+    },
+    {
+      "game": "Sushi Sabotage",
+      "id": "tomo.sushi-sabotage.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 1,
+      "receivers": [
+        "sushi-sabotage.testnet"
+      ],
+      "methods": [
+        "post_offer",
+        "accept_offer",
+        "buy_scout",
+        "approve_referee",
+        "claim_daily"
+      ],
+      "allowance": 0.472213
+    },
+    {
+      "game": "Sushi Sabotage",
+      "id": "fixer.sushi-sabotage.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 1,
+      "receivers": [
+        "sushi-sabotage.testnet"
+      ],
+      "methods": [
+        "post_offer",
+        "accept_offer",
+        "buy_scout",
+        "approve_referee",
+        "claim_daily"
+      ],
+      "allowance": 0.412357
+    },
+    {
+      "game": "Sushi Sabotage",
+      "id": "scout.sushi-sabotage.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 1,
+      "receivers": [
+        "sushi-sabotage.testnet"
+      ],
+      "methods": [
+        "post_offer",
+        "accept_offer",
+        "buy_scout",
+        "approve_referee",
+        "claim_daily"
+      ],
+      "allowance": 0.5
+    },
+    {
+      "game": "Bazaar of Liars",
+      "id": "farrukh.v3.bazaar-liars.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 1,
+      "receivers": [
+        "v3.bazaar-liars.testnet"
+      ],
+      "methods": [
+        "authorize_spend",
+        "pay_agent"
+      ],
+      "allowance": 0.098031
+    },
+    {
+      "game": "Bazaar of Liars",
+      "id": "zaria.v3.bazaar-liars.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 1,
+      "receivers": [
+        "v3.bazaar-liars.testnet"
+      ],
+      "methods": [
+        "authorize_spend",
+        "pay_agent"
+      ],
+      "allowance": 0.090215
+    },
+    {
+      "game": "Bazaar of Liars",
+      "id": "tobin.v3.bazaar-liars.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 1,
+      "receivers": [
+        "v3.bazaar-liars.testnet"
+      ],
+      "methods": [
+        "authorize_spend",
+        "pay_agent"
+      ],
+      "allowance": 0.030877
+    },
+    {
+      "game": "Bazaar of Liars",
+      "id": "wu.v3.bazaar-liars.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 1,
+      "receivers": [
+        "v3.bazaar-liars.testnet"
+      ],
+      "methods": [
+        "authorize_spend",
+        "pay_agent"
+      ],
+      "allowance": 0.096959
+    },
+    {
+      "game": "Bazaar of Liars",
+      "id": "ivy.v3.bazaar-liars.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 1,
+      "receivers": [
+        "v3.bazaar-liars.testnet"
+      ],
+      "methods": [
+        "authorize_spend",
+        "pay_agent"
+      ],
+      "allowance": 0.09106
+    },
+    {
+      "game": "Bazaar of Liars",
+      "id": "rex-2.v3.bazaar-liars.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 1,
+      "receivers": [
+        "v3.bazaar-liars.testnet"
+      ],
+      "methods": [
+        "authorize_spend",
+        "pay_agent"
+      ],
+      "allowance": 1.996907
+    },
+    {
+      "game": "Bazaar of Liars",
+      "id": "lo.v3.bazaar-liars.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 1,
+      "receivers": [
+        "v3.bazaar-liars.testnet"
+      ],
+      "methods": [
+        "authorize_spend",
+        "pay_agent"
+      ],
+      "allowance": 0.1
+    },
+    {
+      "game": "Bazaar of Liars",
+      "id": "vesey-3.v3.bazaar-liars.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 1,
+      "receivers": [
+        "v3.bazaar-liars.testnet"
+      ],
+      "methods": [
+        "authorize_spend",
+        "pay_agent",
+        "post_order"
+      ],
+      "allowance": 4.583102
+    },
+    {
+      "game": "Bazaar of Liars",
+      "id": "teahouse-3.v3.bazaar-liars.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 1,
+      "receivers": [
+        "v3.bazaar-liars.testnet"
+      ],
+      "methods": [
+        "authorize_spend",
+        "pay_agent",
+        "post_order"
+      ],
+      "allowance": 1.746209
+    },
+    {
+      "game": "Bazaar of Liars",
+      "id": "deli-2.v3.bazaar-liars.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 1,
+      "receivers": [
+        "v3.bazaar-liars.testnet"
+      ],
+      "methods": [
+        "authorize_spend",
+        "pay_agent",
+        "post_order"
+      ],
+      "allowance": 0.792389
+    },
+    {
+      "game": "Bazaar of Liars",
+      "id": "hotel-2.v3.bazaar-liars.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 1,
+      "receivers": [
+        "v3.bazaar-liars.testnet"
+      ],
+      "methods": [
+        "authorize_spend",
+        "pay_agent",
+        "post_order"
+      ],
+      "allowance": 0.816703
+    },
+    {
+      "game": "Bazaar of Liars",
+      "id": "dowager-2.v3.bazaar-liars.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 1,
+      "receivers": [
+        "v3.bazaar-liars.testnet"
+      ],
+      "methods": [
+        "authorize_spend",
+        "pay_agent",
+        "post_order"
+      ],
+      "allowance": 0.856015
+    },
+    {
+      "game": "Bazaar of Liars",
+      "id": "cab.v3.bazaar-liars.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 1,
+      "receivers": [
+        "v3.bazaar-liars.testnet"
+      ],
+      "methods": [
+        "authorize_spend",
+        "pay_agent"
+      ],
+      "allowance": 0.1
+    },
+    {
+      "game": "Realm Ledger",
+      "id": "ruler0.realm-ledger.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 1,
+      "receivers": [
+        "realm-ledger.testnet"
+      ],
+      "methods": [
+        "seal",
+        "reveal",
+        "propose_treaty",
+        "accept_treaty",
+        "set_policy",
+        "hire",
+        "deliver",
+        "settle_job"
+      ],
+      "allowance": 0.5
+    },
+    {
+      "game": "Realm Ledger",
+      "id": "ruler1.realm-ledger.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 1,
+      "receivers": [
+        "realm-ledger.testnet"
+      ],
+      "methods": [
+        "seal",
+        "reveal",
+        "propose_treaty",
+        "accept_treaty",
+        "set_policy",
+        "hire",
+        "deliver",
+        "settle_job"
+      ],
+      "allowance": 0.448544
+    },
+    {
+      "game": "Realm Ledger",
+      "id": "ruler2.realm-ledger.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 1,
+      "receivers": [
+        "realm-ledger.testnet"
+      ],
+      "methods": [
+        "seal",
+        "reveal",
+        "propose_treaty",
+        "accept_treaty",
+        "set_policy",
+        "hire",
+        "deliver",
+        "settle_job"
+      ],
+      "allowance": 0.449997
+    },
+    {
+      "game": "Realm Ledger",
+      "id": "ruler3.realm-ledger.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 1,
+      "receivers": [
+        "realm-ledger.testnet"
+      ],
+      "methods": [
+        "seal",
+        "reveal",
+        "propose_treaty",
+        "accept_treaty",
+        "set_policy",
+        "hire",
+        "deliver",
+        "settle_job"
+      ],
+      "allowance": 0.459648
+    },
+    {
+      "game": "Realm Ledger",
+      "id": "ruler4.realm-ledger.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 1,
+      "receivers": [
+        "realm-ledger.testnet"
+      ],
+      "methods": [
+        "seal",
+        "reveal",
+        "propose_treaty",
+        "accept_treaty",
+        "set_policy",
+        "hire",
+        "deliver",
+        "settle_job"
+      ],
+      "allowance": 0.5
+    },
+    {
+      "game": "Realm Ledger",
+      "id": "ruler5.realm-ledger.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 1,
+      "receivers": [
+        "realm-ledger.testnet"
+      ],
+      "methods": [
+        "seal",
+        "reveal",
+        "propose_treaty",
+        "accept_treaty",
+        "set_policy",
+        "hire",
+        "deliver",
+        "settle_job"
+      ],
+      "allowance": 0.5
+    },
+    {
+      "game": "Realm Ledger",
+      "id": "ruler6.realm-ledger.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 1,
+      "receivers": [
+        "realm-ledger.testnet"
+      ],
+      "methods": [
+        "seal",
+        "reveal",
+        "propose_treaty",
+        "accept_treaty",
+        "set_policy",
+        "hire",
+        "deliver",
+        "settle_job"
+      ],
+      "allowance": 0.5
+    },
+    {
+      "game": "Realm Ledger",
+      "id": "ruler7.realm-ledger.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 1,
+      "receivers": [
+        "realm-ledger.testnet"
+      ],
+      "methods": [
+        "seal",
+        "reveal",
+        "propose_treaty",
+        "accept_treaty",
+        "set_policy",
+        "hire",
+        "deliver",
+        "settle_job"
+      ],
+      "allowance": 0.5
+    },
+    {
+      "game": "Realm Ledger",
+      "id": "player.realm-ledger.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 1,
+      "receivers": [
+        "realm-ledger.testnet"
+      ],
+      "methods": [
+        "seal",
+        "reveal",
+        "propose_treaty",
+        "accept_treaty",
+        "set_policy",
+        "hire",
+        "deliver",
+        "settle_job"
+      ],
+      "allowance": 0.455671
+    },
+    {
+      "game": "Realm Ledger",
+      "id": "chancellor.realm-ledger.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 1,
+      "receivers": [
+        "realm-ledger.testnet"
+      ],
+      "methods": [
+        "seal",
+        "reveal",
+        "propose_treaty",
+        "accept_treaty",
+        "set_policy",
+        "hire",
+        "deliver",
+        "settle_job"
+      ],
+      "allowance": 0.496003
+    },
+    {
+      "game": "Realm Ledger",
+      "id": "merc0.realm-ledger.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 1,
+      "receivers": [
+        "realm-ledger.testnet"
+      ],
+      "methods": [
+        "seal",
+        "reveal",
+        "propose_treaty",
+        "accept_treaty",
+        "set_policy",
+        "hire",
+        "deliver",
+        "settle_job"
+      ],
+      "allowance": 0.499592
+    },
+    {
+      "game": "Realm Ledger",
+      "id": "merc1.realm-ledger.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 1,
+      "receivers": [
+        "realm-ledger.testnet"
+      ],
+      "methods": [
+        "seal",
+        "reveal",
+        "propose_treaty",
+        "accept_treaty",
+        "set_policy",
+        "hire",
+        "deliver",
+        "settle_job"
+      ],
+      "allowance": 0.5
+    },
+    {
+      "game": "Realm Ledger",
+      "id": "spy0.realm-ledger.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 1,
+      "receivers": [
+        "realm-ledger.testnet"
+      ],
+      "methods": [
+        "seal",
+        "reveal",
+        "propose_treaty",
+        "accept_treaty",
+        "set_policy",
+        "hire",
+        "deliver",
+        "settle_job"
+      ],
+      "allowance": 0.498599
+    },
+    {
+      "game": "Realm Ledger",
+      "id": "spy1.realm-ledger.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 1,
+      "receivers": [
+        "realm-ledger.testnet"
+      ],
+      "methods": [
+        "seal",
+        "reveal",
+        "propose_treaty",
+        "accept_treaty",
+        "set_policy",
+        "hire",
+        "deliver",
+        "settle_job"
+      ],
+      "allowance": 0.499799
+    },
+    {
+      "game": "Parkwright",
+      "id": "g0.parkwright.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 1,
+      "receivers": [
+        "park.parkwright.testnet"
+      ],
+      "methods": [
+        "settle_day"
+      ],
+      "allowance": null
+    },
+    {
+      "game": "Parkwright",
+      "id": "g1.parkwright.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 1,
+      "receivers": [
+        "park.parkwright.testnet"
+      ],
+      "methods": [
+        "settle_day"
+      ],
+      "allowance": null
+    },
+    {
+      "game": "Parkwright",
+      "id": "g2.parkwright.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 1,
+      "receivers": [
+        "park.parkwright.testnet"
+      ],
+      "methods": [
+        "settle_day"
+      ],
+      "allowance": null
+    },
+    {
+      "game": "Parkwright",
+      "id": "g3.parkwright.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 1,
+      "receivers": [
+        "park.parkwright.testnet"
+      ],
+      "methods": [
+        "settle_day"
+      ],
+      "allowance": null
+    },
+    {
+      "game": "Parkwright",
+      "id": "g4.parkwright.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 1,
+      "receivers": [
+        "park.parkwright.testnet"
+      ],
+      "methods": [
+        "settle_day"
+      ],
+      "allowance": null
+    },
+    {
+      "game": "Parkwright",
+      "id": "g5.parkwright.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 1,
+      "receivers": [
+        "park.parkwright.testnet"
+      ],
+      "methods": [
+        "settle_day"
+      ],
+      "allowance": null
+    },
+    {
+      "game": "Parkwright",
+      "id": "g6.parkwright.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 1,
+      "receivers": [
+        "park.parkwright.testnet"
+      ],
+      "methods": [
+        "settle_day"
+      ],
+      "allowance": null
+    },
+    {
+      "game": "Parkwright",
+      "id": "g7.parkwright.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 1,
+      "receivers": [
+        "park.parkwright.testnet"
+      ],
+      "methods": [
+        "settle_day"
+      ],
+      "allowance": null
+    },
+    {
+      "game": "Emberfall",
+      "id": "brannoc.emberfall.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 1,
+      "receivers": [
+        "emberfall.testnet"
+      ],
+      "methods": [
+        "approve_fee",
+        "offer_to_dark"
+      ],
+      "allowance": 0.499797
+    },
+    {
+      "game": "Emberfall",
+      "id": "gloam.emberfall.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 1,
+      "receivers": [
+        "emberfall.testnet"
+      ],
+      "methods": [
+        "approve_fee",
+        "offer_to_dark"
+      ],
+      "allowance": 0.499797
+    },
+    {
+      "game": "Emberfall",
+      "id": "wick.emberfall.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 1,
+      "receivers": [
+        "emberfall.testnet"
+      ],
+      "methods": [
+        "approve_fee",
+        "offer_to_dark"
+      ],
+      "allowance": 0.499797
+    },
+    {
+      "game": "Emberfall",
+      "id": "moth.emberfall.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 1,
+      "receivers": [
+        "emberfall.testnet"
+      ],
+      "methods": [
+        "approve_fee",
+        "offer_to_dark"
+      ],
+      "allowance": 0.499797
+    },
+    {
+      "game": "Emberfall",
+      "id": "tallow.emberfall.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 1,
+      "receivers": [
+        "emberfall.testnet"
+      ],
+      "methods": [
+        "approve_fee",
+        "offer_to_dark"
+      ],
+      "allowance": 0.499797
+    },
+    {
+      "game": "Inside Job",
+      "id": "seat1.inside-job.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 2,
+      "receivers": [
+        "inside-job.testnet",
+        "dao.inside-job.testnet"
+      ],
+      "methods": [
+        "commit_vote",
+        "act_proposal"
+      ],
+      "allowance": 3.986004
+    },
+    {
+      "game": "Inside Job",
+      "id": "seat2.inside-job.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 2,
+      "receivers": [
+        "inside-job.testnet",
+        "dao.inside-job.testnet"
+      ],
+      "methods": [
+        "commit_vote",
+        "act_proposal"
+      ],
+      "allowance": 3.980394
+    },
+    {
+      "game": "Inside Job",
+      "id": "seat3.inside-job.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 2,
+      "receivers": [
+        "inside-job.testnet",
+        "dao.inside-job.testnet"
+      ],
+      "methods": [
+        "commit_vote",
+        "act_proposal"
+      ],
+      "allowance": 3.98265
+    },
+    {
+      "game": "Inside Job",
+      "id": "seat4.inside-job.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 2,
+      "receivers": [
+        "inside-job.testnet",
+        "dao.inside-job.testnet"
+      ],
+      "methods": [
+        "commit_vote",
+        "act_proposal"
+      ],
+      "allowance": 3.979861
+    },
+    {
+      "game": "Inside Job",
+      "id": "seat5.inside-job.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 2,
+      "receivers": [
+        "dao.inside-job.testnet",
+        "inside-job.testnet"
+      ],
+      "methods": [
+        "act_proposal",
+        "commit_vote"
+      ],
+      "allowance": 3.982791
+    },
+    {
+      "game": "Kraterra",
+      "id": "basalt.kraterra.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 1,
+      "receivers": [
+        "kraterra.testnet"
+      ],
+      "methods": [
+        "play",
+        "mint_starter"
+      ],
+      "allowance": 0.480345
+    },
+    {
+      "game": "Clawtide",
+      "id": "pincer.clawtide.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 1,
+      "receivers": [
+        "clawtide.testnet"
+      ],
+      "methods": [
+        "build_rockpool"
+      ],
+      "allowance": 0.49931
+    },
+    {
+      "game": "Clawtide",
+      "id": "barnacle.clawtide.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 1,
+      "receivers": [
+        "clawtide.testnet"
+      ],
+      "methods": [
+        "build_rockpool"
+      ],
+      "allowance": 0.499307
+    },
+    {
+      "game": "Clawtide",
+      "id": "kelpie.clawtide.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 1,
+      "receivers": [
+        "clawtide.testnet"
+      ],
+      "methods": [
+        "build_rockpool"
+      ],
+      "allowance": 0.499306
+    },
+    {
+      "game": "Clawtide",
+      "id": "coral.clawtide.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 1,
+      "receivers": [
+        "clawtide.testnet"
+      ],
+      "methods": [
+        "build_rockpool"
+      ],
+      "allowance": 0.499307
+    },
+    {
+      "game": "Clawtide",
+      "id": "skitter.clawtide.testnet",
+      "exists": true,
+      "fullKeys": 0,
+      "fcKeys": 1,
+      "receivers": [
+        "clawtide.testnet"
+      ],
+      "methods": [
+        "build_rockpool"
+      ],
+      "allowance": 0.49931
+    }
+  ],
+  "contracts": [
+    {
+      "game": "Sushi Sabotage",
+      "id": "sushi-sabotage.testnet",
+      "balance": 7.134269,
+      "storageBytes": 713399
+    },
+    {
+      "game": "Bazaar of Liars",
+      "id": "v3.bazaar-liars.testnet",
+      "balance": 15.058177,
+      "storageBytes": 1267991
+    },
+    {
+      "game": "Bazaar of Liars",
+      "id": "bazaar-intents.testnet",
+      "balance": 13.990308,
+      "storageBytes": 1306632
+    },
+    {
+      "game": "Realm Ledger",
+      "id": "realm-ledger.testnet",
+      "balance": 6.220821,
+      "storageBytes": 394174
+    },
+    {
+      "game": "Parkwright",
+      "id": "park.parkwright.testnet",
+      "balance": 2.995045,
+      "storageBytes": 215052
+    },
+    {
+      "game": "Fogwater",
+      "id": "fogwater.testnet",
+      "balance": 9.996997,
+      "storageBytes": 198517
+    },
+    {
+      "game": "Emberfall",
+      "id": "emberfall.testnet",
+      "balance": 17.83453,
+      "storageBytes": 355043
+    },
+    {
+      "game": "Inside Job",
+      "id": "inside-job.testnet",
+      "balance": 5.308447,
+      "storageBytes": 289214
+    },
+    {
+      "game": "Inside Job",
+      "id": "dao.inside-job.testnet",
+      "balance": 2.793717,
+      "storageBytes": 29733
+    },
+    {
+      "game": "Kraterra",
+      "id": "kraterra.testnet",
+      "balance": 8.376569,
+      "storageBytes": 271944
+    },
+    {
+      "game": "Clawtide",
+      "id": "clawtide.testnet",
+      "balance": 5.124386,
+      "storageBytes": 292342
+    }
+  ],
+  "stats": [
+    {
+      "key": "sushi_nfts",
+      "kind": "nfts",
+      "label": "chef and recipe-scroll NFTs",
+      "value": 31,
+      "game": "Sushi Sabotage",
+      "source": "sushi-sabotage.testnet nft_total_supply"
+    },
+    {
+      "key": "sushi_treasury",
+      "kind": "other",
+      "label": "NEAR paid by players for energy and gear",
+      "value": 0.2,
+      "game": "Sushi Sabotage",
+      "source": "sushi-sabotage.testnet get_economy"
+    },
+    {
+      "key": "bazaar_haggles",
+      "kind": "played",
+      "label": "haggles committed and revealed",
+      "value": 1733,
+      "game": "Bazaar of Liars",
+      "source": "v3.bazaar-liars.testnet stats"
+    },
+    {
+      "key": "bazaar_unrevealed",
+      "kind": "other",
+      "label": "haggles never revealed",
+      "value": 0,
+      "game": "Bazaar of Liars",
+      "source": "v3.bazaar-liars.testnet stats"
+    },
+    {
+      "key": "bazaar_deliveries",
+      "kind": "other",
+      "label": "customer orders delivered",
+      "value": 4,
+      "game": "Bazaar of Liars",
+      "source": "v3.bazaar-liars.testnet stats"
+    },
+    {
+      "key": "bazaar_burned",
+      "kind": "burned",
+      "label": "coins burned (licences, commission)",
+      "value": 3823,
+      "game": "Bazaar of Liars",
+      "source": "v3.bazaar-liars.testnet stats"
+    },
+    {
+      "key": "bazaar_deeds",
+      "kind": "nfts",
+      "label": "stall deed NFTs",
+      "value": 1,
+      "game": "Bazaar of Liars",
+      "source": "v3.bazaar-liars.testnet nft_total_supply"
+    },
+    {
+      "key": "realm_campaigns",
+      "kind": "played",
+      "label": "campaigns on the ledger",
+      "value": 60,
+      "game": "Realm Ledger",
+      "source": "realm-ledger.testnet get_campaign (probed)"
+    },
+    {
+      "key": "park_days",
+      "kind": "played",
+      "label": "park-days settled by patron agents",
+      "value": 72,
+      "game": "Parkwright",
+      "source": "park.parkwright.testnet list_parks"
+    },
+    {
+      "key": "park_parks",
+      "kind": "other",
+      "label": "parks on chain",
+      "value": 6,
+      "game": "Parkwright",
+      "source": "park.parkwright.testnet list_parks"
+    },
+    {
+      "key": "park_cr",
+      "kind": "supply",
+      "label": "CR (NEP-141) in circulation",
+      "value": 320000,
+      "game": "Parkwright",
+      "source": "park.parkwright.testnet audit"
+    },
+    {
+      "key": "fog_games",
+      "kind": "played",
+      "label": "games created",
+      "value": 8,
+      "game": "Fogwater",
+      "source": "fogwater.testnet get_config"
+    },
+    {
+      "key": "ember_matches",
+      "kind": "played",
+      "label": "matches settled",
+      "value": 15,
+      "game": "Emberfall",
+      "source": "emberfall.testnet ember_supply"
+    },
+    {
+      "key": "ember_minted",
+      "kind": "minted",
+      "label": "EMBER minted",
+      "value": 727,
+      "game": "Emberfall",
+      "source": "emberfall.testnet ember_supply"
+    },
+    {
+      "key": "ember_burned",
+      "kind": "burned",
+      "label": "EMBER burned",
+      "value": 63,
+      "game": "Emberfall",
+      "source": "emberfall.testnet ember_supply"
+    },
+    {
+      "key": "ember_supply",
+      "kind": "supply",
+      "label": "EMBER in existence",
+      "value": 664,
+      "game": "Emberfall",
+      "source": "emberfall.testnet ember_supply"
+    },
+    {
+      "key": "ember_wardens",
+      "kind": "nfts",
+      "label": "Warden NFTs",
+      "value": 15,
+      "game": "Emberfall",
+      "source": "emberfall.testnet nft_total_supply"
+    },
+    {
+      "key": "ij_shifts",
+      "kind": "played",
+      "label": "shifts settled",
+      "value": 9,
+      "game": "Inside Job",
+      "source": "inside-job.testnet info"
+    },
+    {
+      "key": "ij_proposals",
+      "kind": "other",
+      "label": "Sputnik DAO spend proposals",
+      "value": 63,
+      "game": "Inside Job",
+      "source": "dao.inside-job.testnet get_last_proposal_id"
+    },
+    {
+      "key": "krat_duels",
+      "kind": "played",
+      "label": "duels created",
+      "value": 11,
+      "game": "Kraterra",
+      "source": "kraterra.testnet get_config"
+    },
+    {
+      "key": "krat_packs",
+      "kind": "nfts",
+      "label": "munition-pack NFTs",
+      "value": 3,
+      "game": "Kraterra",
+      "source": "kraterra.testnet nft_total_supply"
+    },
+    {
+      "key": "claw_rounds",
+      "kind": "played",
+      "label": "rounds settled this season",
+      "value": 7,
+      "game": "Clawtide",
+      "source": "clawtide.testnet season_info"
+    },
+    {
+      "key": "claw_raids",
+      "kind": "other",
+      "label": "rockpool raids this season",
+      "value": 2,
+      "game": "Clawtide",
+      "source": "clawtide.testnet season_info"
+    },
+    {
+      "key": "claw_pearl",
+      "kind": "supply",
+      "label": "PEARL in existence (no burn rule)",
+      "value": 204,
+      "game": "Clawtide",
+      "source": "clawtide.testnet season_info"
+    }
+  ],
+  "failed": []
+}
