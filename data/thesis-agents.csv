@@ -1,0 +1,58 @@
+game,account,exists,full_access_keys,function_call_keys,receivers,methods,allowance_near_left
+Sushi Sabotage,kenji.sushi-sabotage.testnet,true,0,1,sushi-sabotage.testnet,post_offer accept_offer buy_scout approve_referee claim_daily,0.463666
+Sushi Sabotage,mei.sushi-sabotage.testnet,true,0,1,sushi-sabotage.testnet,post_offer accept_offer buy_scout approve_referee claim_daily,0.471961
+Sushi Sabotage,hana.sushi-sabotage.testnet,true,0,1,sushi-sabotage.testnet,post_offer accept_offer buy_scout approve_referee claim_daily,0.462365
+Sushi Sabotage,tomo.sushi-sabotage.testnet,true,0,1,sushi-sabotage.testnet,post_offer accept_offer buy_scout approve_referee claim_daily,0.472213
+Sushi Sabotage,fixer.sushi-sabotage.testnet,true,0,1,sushi-sabotage.testnet,post_offer accept_offer buy_scout approve_referee claim_daily,0.412357
+Sushi Sabotage,scout.sushi-sabotage.testnet,true,0,1,sushi-sabotage.testnet,post_offer accept_offer buy_scout approve_referee claim_daily,0.5
+Bazaar of Liars,farrukh.v3.bazaar-liars.testnet,true,0,1,v3.bazaar-liars.testnet,authorize_spend pay_agent,0.098031
+Bazaar of Liars,zaria.v3.bazaar-liars.testnet,true,0,1,v3.bazaar-liars.testnet,authorize_spend pay_agent,0.090215
+Bazaar of Liars,tobin.v3.bazaar-liars.testnet,true,0,1,v3.bazaar-liars.testnet,authorize_spend pay_agent,0.030877
+Bazaar of Liars,wu.v3.bazaar-liars.testnet,true,0,1,v3.bazaar-liars.testnet,authorize_spend pay_agent,0.096959
+Bazaar of Liars,ivy.v3.bazaar-liars.testnet,true,0,1,v3.bazaar-liars.testnet,authorize_spend pay_agent,0.09106
+Bazaar of Liars,rex-2.v3.bazaar-liars.testnet,true,0,1,v3.bazaar-liars.testnet,authorize_spend pay_agent,1.996907
+Bazaar of Liars,lo.v3.bazaar-liars.testnet,true,0,1,v3.bazaar-liars.testnet,authorize_spend pay_agent,0.1
+Bazaar of Liars,vesey-3.v3.bazaar-liars.testnet,true,0,1,v3.bazaar-liars.testnet,authorize_spend pay_agent post_order,4.583102
+Bazaar of Liars,teahouse-3.v3.bazaar-liars.testnet,true,0,1,v3.bazaar-liars.testnet,authorize_spend pay_agent post_order,1.746209
+Bazaar of Liars,deli-2.v3.bazaar-liars.testnet,true,0,1,v3.bazaar-liars.testnet,authorize_spend pay_agent post_order,0.792389
+Bazaar of Liars,hotel-2.v3.bazaar-liars.testnet,true,0,1,v3.bazaar-liars.testnet,authorize_spend pay_agent post_order,0.816703
+Bazaar of Liars,dowager-2.v3.bazaar-liars.testnet,true,0,1,v3.bazaar-liars.testnet,authorize_spend pay_agent post_order,0.856015
+Bazaar of Liars,cab.v3.bazaar-liars.testnet,true,0,1,v3.bazaar-liars.testnet,authorize_spend pay_agent,0.1
+Realm Ledger,ruler0.realm-ledger.testnet,true,0,1,realm-ledger.testnet,seal reveal propose_treaty accept_treaty set_policy hire deliver settle_job,0.5
+Realm Ledger,ruler1.realm-ledger.testnet,true,0,1,realm-ledger.testnet,seal reveal propose_treaty accept_treaty set_policy hire deliver settle_job,0.448544
+Realm Ledger,ruler2.realm-ledger.testnet,true,0,1,realm-ledger.testnet,seal reveal propose_treaty accept_treaty set_policy hire deliver settle_job,0.449997
+Realm Ledger,ruler3.realm-ledger.testnet,true,0,1,realm-ledger.testnet,seal reveal propose_treaty accept_treaty set_policy hire deliver settle_job,0.459648
+Realm Ledger,ruler4.realm-ledger.testnet,true,0,1,realm-ledger.testnet,seal reveal propose_treaty accept_treaty set_policy hire deliver settle_job,0.5
+Realm Ledger,ruler5.realm-ledger.testnet,true,0,1,realm-ledger.testnet,seal reveal propose_treaty accept_treaty set_policy hire deliver settle_job,0.5
+Realm Ledger,ruler6.realm-ledger.testnet,true,0,1,realm-ledger.testnet,seal reveal propose_treaty accept_treaty set_policy hire deliver settle_job,0.5
+Realm Ledger,ruler7.realm-ledger.testnet,true,0,1,realm-ledger.testnet,seal reveal propose_treaty accept_treaty set_policy hire deliver settle_job,0.5
+Realm Ledger,player.realm-ledger.testnet,true,0,1,realm-ledger.testnet,seal reveal propose_treaty accept_treaty set_policy hire deliver settle_job,0.455671
+Realm Ledger,chancellor.realm-ledger.testnet,true,0,1,realm-ledger.testnet,seal reveal propose_treaty accept_treaty set_policy hire deliver settle_job,0.496003
+Realm Ledger,merc0.realm-ledger.testnet,true,0,1,realm-ledger.testnet,seal reveal propose_treaty accept_treaty set_policy hire deliver settle_job,0.499592
+Realm Ledger,merc1.realm-ledger.testnet,true,0,1,realm-ledger.testnet,seal reveal propose_treaty accept_treaty set_policy hire deliver settle_job,0.5
+Realm Ledger,spy0.realm-ledger.testnet,true,0,1,realm-ledger.testnet,seal reveal propose_treaty accept_treaty set_policy hire deliver settle_job,0.498599
+Realm Ledger,spy1.realm-ledger.testnet,true,0,1,realm-ledger.testnet,seal reveal propose_treaty accept_treaty set_policy hire deliver settle_job,0.499799
+Parkwright,g0.parkwright.testnet,true,0,1,park.parkwright.testnet,settle_day,unlimited
+Parkwright,g1.parkwright.testnet,true,0,1,park.parkwright.testnet,settle_day,unlimited
+Parkwright,g2.parkwright.testnet,true,0,1,park.parkwright.testnet,settle_day,unlimited
+Parkwright,g3.parkwright.testnet,true,0,1,park.parkwright.testnet,settle_day,unlimited
+Parkwright,g4.parkwright.testnet,true,0,1,park.parkwright.testnet,settle_day,unlimited
+Parkwright,g5.parkwright.testnet,true,0,1,park.parkwright.testnet,settle_day,unlimited
+Parkwright,g6.parkwright.testnet,true,0,1,park.parkwright.testnet,settle_day,unlimited
+Parkwright,g7.parkwright.testnet,true,0,1,park.parkwright.testnet,settle_day,unlimited
+Emberfall,brannoc.emberfall.testnet,true,0,1,emberfall.testnet,approve_fee offer_to_dark,0.499797
+Emberfall,gloam.emberfall.testnet,true,0,1,emberfall.testnet,approve_fee offer_to_dark,0.499797
+Emberfall,wick.emberfall.testnet,true,0,1,emberfall.testnet,approve_fee offer_to_dark,0.499797
+Emberfall,moth.emberfall.testnet,true,0,1,emberfall.testnet,approve_fee offer_to_dark,0.499797
+Emberfall,tallow.emberfall.testnet,true,0,1,emberfall.testnet,approve_fee offer_to_dark,0.499797
+Inside Job,seat1.inside-job.testnet,true,0,2,inside-job.testnet dao.inside-job.testnet,commit_vote act_proposal,3.986004
+Inside Job,seat2.inside-job.testnet,true,0,2,inside-job.testnet dao.inside-job.testnet,commit_vote act_proposal,3.980394
+Inside Job,seat3.inside-job.testnet,true,0,2,inside-job.testnet dao.inside-job.testnet,commit_vote act_proposal,3.98265
+Inside Job,seat4.inside-job.testnet,true,0,2,inside-job.testnet dao.inside-job.testnet,commit_vote act_proposal,3.979861
+Inside Job,seat5.inside-job.testnet,true,0,2,dao.inside-job.testnet inside-job.testnet,act_proposal commit_vote,3.982791
+Kraterra,basalt.kraterra.testnet,true,0,1,kraterra.testnet,play mint_starter,0.480345
+Clawtide,pincer.clawtide.testnet,true,0,1,clawtide.testnet,build_rockpool,0.49931
+Clawtide,barnacle.clawtide.testnet,true,0,1,clawtide.testnet,build_rockpool,0.499307
+Clawtide,kelpie.clawtide.testnet,true,0,1,clawtide.testnet,build_rockpool,0.499306
+Clawtide,coral.clawtide.testnet,true,0,1,clawtide.testnet,build_rockpool,0.499307
+Clawtide,skitter.clawtide.testnet,true,0,1,clawtide.testnet,build_rockpool,0.49931
