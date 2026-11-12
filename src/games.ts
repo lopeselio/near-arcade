@@ -124,7 +124,7 @@ export const GAMES = [
     blurb: 'Turn-based tank duels that carve craters in voxel hills. NEAR’s block randomness draws the map and the weapon pool, you draft munitions (rare ones are NFTs you own), and every shot is recorded and replayed onchain.',
     accounts: [['kraterra.testnet', 'Game contract', true], ['kraterra-ref.testnet', 'Referee'], ['kraterra-relay.testnet', 'Relay'], ['basalt.kraterra.testnet', 'AI tank']],
     tracks: {
-      games: 'Turn-based tank duels in destructible voxels, against a friend or the AI tank Basalt.',
+      games: 'Munition-pack NFTs you own unlock rare weapons in turn-based tank duels in destructible voxels, against a friend or the AI tank Basalt.',
       nfts: 'Partial: munition-pack NFTs carry access; only a pack’s owner can draft its rare weapon in a match.',
       thesis: 'Feeds /thesis: duels on the contract, munition NFTs, the AI tank’s scoped key.',
     },
