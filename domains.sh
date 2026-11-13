@@ -7,7 +7,7 @@
 #                          #    points wallet sign-in at the new URLs, and switches the arcade's links
 #
 #   arcade.lopeselio.online      -> this arcade (Vercel project near-arcade)
-#   sushi.lopeselio.online       -> Sushi Sabotage   (Azure Container Apps, RG sushi-sabotage)
+#   sushi-sabotage.lopeselio.online       -> Sushi Sabotage   (Azure Container Apps, RG sushi-sabotage)
 #   bazaar.lopeselio.online      -> Bazaar of Liars  (Azure Container Apps, RG bazaar-liars)
 #   parkwright.lopeselio.online  -> Parkwright       (Azure Container Apps, RG parkwright)
 #   fogwater.lopeselio.online    -> Fogwater         (Azure Container Apps, RG fogwater)
@@ -25,7 +25,7 @@ SCOPE=${VERCEL_SCOPE:-lopeselios-projects}
 cd "$(dirname "$0")"
 
 # sub | resource group | container app
-ACA=("sushi sushi-sabotage sushi-sabotage" "bazaar bazaar-liars bazaar-liars" "parkwright parkwright parkwright" "fogwater fogwater fogwater" "emberfall emberfall emberfall" "inside-job inside-job inside-job" "kraterra kraterra kraterra" "clawtide clawtide clawtide")
+ACA=("sushi-sabotage sushi-sabotage sushi-sabotage" "bazaar bazaar-liars bazaar-liars" "parkwright parkwright parkwright" "fogwater fogwater fogwater" "emberfall emberfall emberfall" "inside-job inside-job inside-job" "kraterra kraterra kraterra" "clawtide clawtide clawtide")
 # sub | vercel project
 VERCEL=("arcade near-arcade" "realm realm-ledger")
 
@@ -75,7 +75,7 @@ bind() {
   # wallet sign-in is bound to the page's host (the wallet signs "Sign in to <host>")
   echo "== wallet sign-in URLs"
   az containerapp update -g bazaar-liars -n bazaar-liars --set-env-vars "BETTER_AUTH_URL=https://bazaar.$DOMAIN" -o none
-  az containerapp update -g sushi-sabotage -n sushi-sabotage --set-env-vars "BETTER_AUTH_URL=https://sushi.$DOMAIN" -o none
+  az containerapp update -g sushi-sabotage -n sushi-sabotage --set-env-vars "BETTER_AUTH_URL=https://sushi-sabotage.$DOMAIN" -o none
   az containerapp update -g fogwater -n fogwater --set-env-vars "BETTER_AUTH_URL=https://fogwater.$DOMAIN" -o none
   az containerapp update -g emberfall -n emberfall --set-env-vars "BETTER_AUTH_URL=https://emberfall.$DOMAIN" -o none
   az containerapp update -g inside-job -n inside-job --set-env-vars "BETTER_AUTH_URL=https://inside-job.$DOMAIN" -o none
@@ -85,14 +85,14 @@ bind() {
   # the arcade links to the subdomains from now on (the game URLs live in src/games.ts; Vercel rebuilds the app)
   echo "== arcade links"
   sed -i.bak \
-    -e "s#https://sushi-sabotage\.[a-z0-9-]*\.northeurope\.azurecontainerapps\.io/#https://sushi.$DOMAIN/#" \
+    -e "s#https://sushi-sabotage\.[a-z0-9-]*\.northeurope\.azurecontainerapps\.io/#https://sushi-sabotage.$DOMAIN/#" \
     -e "s#https://bazaar-liars\.[a-z0-9-]*\.northeurope\.azurecontainerapps\.io/#https://bazaar.$DOMAIN/#" \
     -e "s#https://parkwright\.[a-z0-9-]*\.northeurope\.azurecontainerapps\.io/#https://parkwright.$DOMAIN/#" \
     -e "s#https://realm-ledger\.vercel\.app/#https://realm.$DOMAIN/#" src/games.ts
   rm -f src/games.ts.bak
   vercel deploy --prod --yes --scope "$SCOPE" >/dev/null
   echo
-  for sub in arcade sushi bazaar parkwright realm fogwater emberfall inside-job kraterra clawtide; do
+  for sub in arcade sushi-sabotage bazaar parkwright realm fogwater emberfall inside-job kraterra clawtide; do
     printf "%-28s %s\n" "https://$sub.$DOMAIN/" "$(curl -s -o /dev/null -w '%{http_code}' "https://$sub.$DOMAIN/" || true)"
   done
 }

@@ -10,7 +10,7 @@ git clone --recurse-submodules https://github.com/lopeselio/near-arcade
 
 | Game | Repo | Contract (testnet) | Play it | In one line |
 |---|---|---|---|---|
-| Sushi Sabotage | [lopeselio/sushi-sabotage](https://github.com/lopeselio/sushi-sabotage) | `sushi-sabotage.testnet` | [sushi.lopeselio.online](https://sushi.lopeselio.online) | Kitchen race with secret sabotage, sealed onchain and opened at the bell; AI chefs with wallets; chef NFTs that hold their purse |
+| Sushi Sabotage | [lopeselio/sushi-sabotage](https://github.com/lopeselio/sushi-sabotage) | `sushi-sabotage.testnet` | [sushi-sabotage.lopeselio.online](https://sushi-sabotage.lopeselio.online) | Kitchen race with secret sabotage, sealed onchain and opened at the bell; AI chefs with wallets; chef NFTs that hold their purse |
 | Bazaar of Liars | [lopeselio/bazaar-of-liars](https://github.com/lopeselio/bazaar-of-liars) | `v3.bazaar-liars.testnet` | [bazaar.lopeselio.online](https://bazaar.lopeselio.online) | Haggle with bluffing AI merchants whose secrets are committed onchain and whose lines are TEE-signed |
 | Realm Ledger | [lopeselio/realm-ledger](https://github.com/lopeselio/realm-ledger) | `realm-ledger.testnet` | [realm.lopeselio.online](https://realm.lopeselio.online) | Conquest where AI rulers with wallets and every player seal their orders at once |
 | Parkwright | [lopeselio/parkwright](https://github.com/lopeselio/parkwright) | `park.parkwright.testnet` | [parkwright.lopeselio.online](https://parkwright.lopeselio.online) | Theme-park builder; guests are agents with wallets; parks settled by replay and claimable onchain |
