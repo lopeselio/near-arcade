@@ -1,0 +1,27 @@
+[submodule "games/fogwater"]
+	path = games/fogwater
+	url = https://github.com/lopeselio/fogwater.git
+[submodule "games/emberfall"]
+	path = games/emberfall
+	url = https://github.com/lopeselio/emberfall.git
+[submodule "games/inside-job"]
+	path = games/inside-job
+	url = https://github.com/lopeselio/inside-job.git
+[submodule "games/sushi-sabotage"]
+	path = games/sushi-sabotage
+	url = https://github.com/lopeselio/sushi-sabotage.git
+[submodule "games/bazaar-of-liars"]
+	path = games/bazaar-of-liars
+	url = https://github.com/lopeselio/bazaar-of-liars.git
+[submodule "games/realm-ledger"]
+	path = games/realm-ledger
+	url = https://github.com/lopeselio/realm-ledger.git
+[submodule "games/parkwright"]
+	path = games/parkwright
+	url = https://github.com/lopeselio/parkwright.git
+[submodule "games/kraterra"]
+	path = games/kraterra
+	url = https://github.com/lopeselio/kraterra.git
+[submodule "games/clawtide"]
+	path = games/clawtide
+	url = https://github.com/lopeselio/clawtide.git
