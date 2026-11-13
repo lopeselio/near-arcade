@@ -2,6 +2,12 @@
 
 **This submission is nine games.** Each one is its own repo, NEAR testnet contract and hosted server, listed below. This repo is only their launcher: one static page (https://arcade.lopeselio.online) that embeds the nine games and reads their contracts live. To judge the games, use the table and the [proof commands](#check-every-track-yourself-no-keys); to judge the arcade, read on.
 
+**All nine game repos are included here as git submodules** under [`games/`](games), each pinned to the version that is deployed, so one checkout holds every game's code and contract:
+
+```sh
+git clone --recurse-submodules https://github.com/lopeselio/near-arcade
+```
+
 | Game | Repo | Contract (testnet) | Play it | In one line |
 |---|---|---|---|---|
 | Sushi Sabotage | [lopeselio/sushi-sabotage](https://github.com/lopeselio/sushi-sabotage) | `sushi-sabotage.testnet` | [sushi.lopeselio.online](https://sushi.lopeselio.online) | Kitchen race with secret sabotage, sealed onchain and opened at the bell; AI chefs with wallets; chef NFTs that hold their purse |
@@ -59,6 +65,8 @@ Not claimed: business, realworld (see [Signalfire](#other-submission)).
 ## Check every track yourself (no keys)
 
 One command per track, against the hosted games and public testnet RPC. You need Node 22+, pnpm and git; nothing else, no `.env`. The `pnpm verify` commands fetch a finished match's proof bundle from the hosted game and check it against the contract. The ids below are real matches played on the hosted games (re-checked 12 Nov 2026); most games' result screens show the same command for your own match. The `curl` commands need only `curl` and `node`.
+
+Already cloned this repo with `--recurse-submodules`? Skip each `git clone …` and `cd games/<repo>` instead (for example `cd games/emberfall && pnpm install`).
 
 Public RPC rate-limits bursts. If one answers `-429` or "rate limit", run it again in a minute or swap the RPC URL for another public testnet one: `https://near-testnet.drpc.org`, `https://testnet-rpc.intea.rs`, `https://rpc.testnet.fastnear.com`.
 
@@ -215,12 +223,14 @@ The script needs no keys and no install beyond Node. It prints a summary, e.g. `
 | `src/main.tsx` | which page a path gets: the floor, a game over it, /thesis, or the not-found page |
 | `src/components/` | Sign, Ticker, TrackBar, Cabinet, LivePanel, CoinBox, ChangeMachine, Footer, GameScreen, Thesis (the /thesis page), NotFound |
 | `src/styles.css` | the whole look |
+| `games/` | the nine game repos as git submodules, each pinned to its deployed commit (`git submodule update --remote` moves them to each repo's latest `main`); the arcade's build doesn't read them |
 
 ## Add a game
 
 1. Add one entry to `GAMES` in `src/games.ts` (set `light: true` if the glow is bright, `play: 'desktop'` or `'mobile'` only if the other kind of device can't run it, with `playNote` for the reason and `phoneUrl` for a version that does work on a phone, and `tracks` with a one-line note for each track it proves).
 2. Add its loader to `LOADERS` in `src/loaders.ts`, keyed by the slug (the build fails until it exists).
-3. Drop a short animated capture (about 480×300, it is cropped to 16:10) at `public/thumbs/<slug>.webp`.
+3. Add its repo as a submodule: `git submodule add https://github.com/lopeselio/<repo>.git games/<repo>`.
+4. Drop a short animated capture (about 480×300, it is cropped to 16:10) at `public/thumbs/<slug>.webp`.
 
 Its path `/<slug>` works on Vercel and Azure with no config change (any slug but `thesis`). To count its agents on /thesis, add them to `AGENT_ROSTER` and its contract to `CONTRACTS` in `src/thesis.ts`. For a new subdomain, add the game to the lists in `domains.sh`.
 
