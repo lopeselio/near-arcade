@@ -2,7 +2,7 @@
 
 **This submission is nine games.** Each one is its own repo, NEAR testnet contract and hosted server, listed below. This repo is only their launcher: one static page (https://arcade.lopeselio.online) that embeds the nine games and reads their contracts live. To judge the games, use the table and the [proof commands](#check-every-track-yourself-no-keys); to judge the arcade, read on.
 
-**All nine game repos are included here as git submodules** under [`games/`](games), each pinned to the version that is deployed, so one checkout holds every game's code and contract:
+**All nine game repos are included here as git submodules** under [`games/`](games), each pinned to a commit whose code is what the hosted game runs, so one checkout holds every game's code and contract:
 
 ```sh
 git clone --recurse-submodules https://github.com/lopeselio/near-arcade
@@ -223,7 +223,7 @@ The script needs no keys and no install beyond Node. It prints a summary, e.g. `
 | `src/main.tsx` | which page a path gets: the floor, a game over it, /thesis, or the not-found page |
 | `src/components/` | Sign, Ticker, TrackBar, Cabinet, LivePanel, CoinBox, ChangeMachine, Footer, GameScreen, Thesis (the /thesis page), NotFound |
 | `src/styles.css` | the whole look |
-| `games/` | the nine game repos as git submodules, each pinned to its deployed commit (`git submodule update --remote` moves them to each repo's latest `main`); the arcade's build doesn't read them |
+| `games/` | the nine game repos as git submodules, each pinned to a commit whose code is what the hosted game runs (later commits may be docs only; `git submodule update --remote` moves them to each repo's latest `main`); the arcade's build doesn't read them |
 
 ## Add a game
 
