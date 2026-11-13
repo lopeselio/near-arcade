@@ -33,7 +33,7 @@ export interface Game {
 
 export const GAMES = [
   { title: 'Sushi Sabotage', slug: 'sushi', glow: '#ff6a3c', badge: '1–4 players', thumb: '/thumbs/sushi.webp',
-    url: 'https://sushi.lopeselio.online/', repo: 'https://github.com/lopeselio/sushi-sabotage',
+    url: 'https://sushi-sabotage.lopeselio.online/', repo: 'https://github.com/lopeselio/sushi-sabotage',
     blurb: 'A three-minute sushi kitchen race. Wreck rivals’ dishes in secret; the sabotage log is sealed onchain and opened when the shift ends.',
     accounts: [['sushi-sabotage.testnet', 'Game contract', true], ['sushi-sabotage-ref.testnet', 'Referee'], ['sushi-sabotage-relay.testnet', 'Relay']],
     tracks: {
