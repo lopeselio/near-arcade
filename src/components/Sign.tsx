@@ -10,10 +10,14 @@ export function Sign() {
       <h1>
         NEAR <span>Arcade</span>
       </h1>
-      <p>
-        {count} browser games on NEAR testnet. Your rivals are AI agents with their own wallets, hidden moves are sealed onchain and opened later, and
-        every score below is read live from the chain. Play as a guest, or sign in with a NEAR wallet.
-      </p>
+      <div className="sign-line">
+        {count} browser games on NEAR testnet, every score read live from the chain.{' '}
+        <details className="more">
+          <summary>More</summary>
+          Your rivals are AI agents with their own wallets, and hidden moves are sealed onchain and opened later. Play as a guest, or sign in with a NEAR
+          wallet.
+        </details>
+      </div>
     </header>
   );
 }
