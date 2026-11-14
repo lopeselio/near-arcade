@@ -1,4 +1,4 @@
-import type { CSSProperties } from 'react';
+import { useState, type CSSProperties } from 'react';
 import { PLATES, type Game } from '../games';
 import { TRACKS, type TrackId } from '../tracks';
 import { isPhone, type AccountRow, type PanelState } from '../hooks';
@@ -17,6 +17,7 @@ interface Props {
 /** One game on the floor: marquee, device plate, CRT screen, control deck, blurb, live board, coin box. */
 export function Cabinet({ game: g, panel, accounts, onPlay, track }: Props) {
   const play = () => onPlay(g);
+  const [more, setMore] = useState(false);
   const [label, genericTip, icon] = PLATES[g.play ?? 'any'];
   const tip = g.playNote ? `${genericTip.split(':')[0]}. ${g.playNote}` : genericTip;
   const warning =
@@ -76,7 +77,10 @@ export function Cabinet({ game: g, panel, accounts, onPlay, track }: Props) {
         </button>
       </div>
       <div className="about">
-        <p>{g.blurb}</p>
+        <p className={more ? '' : 'clamp'} id={`blurb-${g.slug}`}>{g.blurb}</p>
+        <button type="button" className="more-btn" aria-expanded={more} aria-controls={`blurb-${g.slug}`} onClick={() => setMore((v) => !v)}>
+          {more ? 'Less' : 'More'}
+        </button>
         <div className="links">
           <a href={g.url} target="_blank" rel="noopener">
             Open in a new tab

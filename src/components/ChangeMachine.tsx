@@ -9,8 +9,8 @@ export function ChangeMachine({ rows }: { rows: AccountRow[] | null }) {
     <section className="change" aria-labelledby="change-h">
       <h2 id="change-h">Change machine</h2>
       <p>
-        The NEAR testnet accounts that run each game, with their balances right now. Contracts pay for their own storage, so the last column shows how
-        much of each contract's balance is still free for new games.
+        The accounts that run each game, with their balances right now.{' '}
+        <span className="dim">The last column is how much of each contract's balance is still free for storage.</span>
       </p>
       <div className="totals" id="totals">
         {rows && (

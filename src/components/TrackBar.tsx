@@ -29,7 +29,7 @@ export function TrackBar({ track, onPick }: { track: TrackId | null; onPick: (id
             </a>
           </>
         ) : (
-          'Pick a track to light up the cabinets that prove it, each with a one-line note on where to look.'
+          'Pick a track to light up the cabinets that prove it.'
         )}
       </p>
     </section>
