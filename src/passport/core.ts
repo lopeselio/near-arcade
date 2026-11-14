@@ -99,29 +99,36 @@ function remember<T>(key: string, ttlMs: number, read: () => Promise<T>): Promis
 const NB = 'https://api-testnet.nearblocks.io/v3/accounts/';
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
-async function nearblocks(path: string, key?: string): Promise<{ data: any[]; meta?: { next_page?: string } }> {
-  for (let attempt = 0; ; attempt++) {
-    const r = await fetch(NB + path, {
-      headers: key ? { authorization: `Bearer ${key}` } : {},
-      signal: AbortSignal.timeout(12_000),
-    });
-    if (r.status === 429 && attempt < 2) {
-      await sleep(Math.min(8000, (Number(r.headers.get('retry-after')) || 2) * 1000 * (attempt + 1)));
-      continue;
+/** NearBlocks' free tier allows only a few calls a minute, so calls go out one at a time, spaced. */
+let queue: Promise<unknown> = Promise.resolve();
+function paced<T>(fn: () => Promise<T>): Promise<T> {
+  const run = queue.then(fn, fn);
+  queue = run.then(() => sleep(400), () => sleep(400));
+  return run;
+}
+
+function nearblocks(path: string, key?: string): Promise<{ data: any[]; meta?: { next_page?: string } }> {
+  return paced(async () => {
+    for (let attempt = 0; ; attempt++) {
+      const r = await fetch(NB + path, { headers: key ? { authorization: `Bearer ${key}` } : {}, signal: AbortSignal.timeout(12_000) });
+      if (r.status === 429 && attempt < 1) {
+        await sleep(Math.min(6000, (Number(r.headers.get('retry-after')) || 3) * 1000));
+        continue;
+      }
+      if (!r.ok) throw new Error(r.status === 429 ? 'NearBlocks is rate-limiting right now' : `NearBlocks answered HTTP ${r.status}`);
+      const b = await r.json();
+      if (b.errors?.length) throw new Error(`NearBlocks: ${b.errors[0].message}`);
+      return { data: b.data ?? [], meta: b.meta };
     }
-    if (!r.ok) throw new Error(r.status === 429 ? 'NearBlocks is rate-limiting right now' : `NearBlocks answered HTTP ${r.status}`);
-    const b = await r.json();
-    if (b.errors?.length) throw new Error(`NearBlocks: ${b.errors[0].message}`);
-    return { data: b.data ?? [], meta: b.meta };
-  }
+  });
 }
 
 /** Receipts pages to walk (100 each): enough for a busy week of play, few requests. */
 const RECEIPT_PAGES = 3;
 
-async function readActivity(account: string, key?: string): Promise<Action[]> {
+/** Receipts the account sent to a game contract (directly, or as the inner sender of a relayed meta-transaction). */
+async function readReceipts(account: string, key?: string): Promise<Action[]> {
   const out: Action[] = [];
-  // 1. receipts the account sent to a game contract (directly, or as the inner sender of a relayed meta-transaction)
   let next: string | undefined;
   for (let page = 0; page < RECEIPT_PAGES; page++) {
     const res = await nearblocks(`${account}/receipts?limit=100${next ? `&next=${encodeURIComponent(next)}` : ''}`, key);
@@ -134,10 +141,15 @@ async function readActivity(account: string, key?: string): Promise<Action[]> {
     next = res.meta?.next_page;
     if (!next || res.data.length < 100) break;
   }
-  // 2. game tokens that reached the account (PEARL for a settled sandbar, a chef NFT, a munition pack...)
-  const [ft, nft] = await Promise.all([nearblocks(`${account}/ft-txns?limit=100`, key), nearblocks(`${account}/nft-txns?limit=100`, key)]);
-  for (const [rows, source] of [[ft.data, 'ft'], [nft.data, 'nft']] as const) {
-    for (const e of rows) {
+  return out;
+}
+
+/** Game tokens that reached the account: PEARL for a settled sandbar, a chef, Warden or munition NFT... */
+async function readTokens(account: string, key?: string): Promise<Action[]> {
+  const out: Action[] = [];
+  for (const source of ['ft', 'nft'] as const) {
+    const { data } = await nearblocks(`${account}/${source}-txns?limit=100`, key);
+    for (const e of data) {
       const game = CONTRACTS.get(e.contract_account_id);
       if (!game || e.affected_account_id !== account || num(e.delta_amount) <= 0) continue;
       const sym = source === 'ft' ? e.meta?.symbol ?? 'tokens' : `${e.meta?.symbol ?? ''} NFT`.trim();
@@ -145,7 +157,28 @@ async function readActivity(account: string, key?: string): Promise<Action[]> {
       out.push({ at: nsToMs(e.block_timestamp ?? e.block?.block_timestamp), game, what: `${verb} ${source === 'ft' ? `${e.delta_amount} ` : ''}${sym}`, tx: e.transaction_hash, source });
     }
   }
-  return out.sort((a, b) => b.at - a.at);
+  return out;
+}
+
+/** Last good answer per account and kind, served when NearBlocks says no. */
+const lastGood = new Map<string, Action[]>();
+async function withLastGood(key: string, ttl: number, read: () => Promise<Action[]>): Promise<{ actions: Action[]; error?: string }> {
+  try {
+    const actions = await remember(key, ttl, read);
+    lastGood.set(key, actions);
+    if (lastGood.size > 1000) lastGood.delete(lastGood.keys().next().value!);
+    return { actions };
+  } catch (e) {
+    return { actions: lastGood.get(key) ?? [], error: lastGood.has(key) ? undefined : (e as Error).message };
+  }
+}
+
+/** Receipts are re-read every 90 s; token events (rarer, and mostly the same days) every 10 min. */
+async function readActivity(account: string, key?: string): Promise<{ actions: Action[]; error?: string }> {
+  const rec = await withLastGood(`receipts|${account}`, 90_000, () => readReceipts(account, key));
+  const tok = await withLastGood(`tokens|${account}`, 600_000, () => readTokens(account, key));
+  const error = rec.error && tok.error ? rec.error : rec.error ? `receipts: ${rec.error}` : tok.error ? `token mints: ${tok.error}` : undefined;
+  return { actions: [...rec.actions, ...tok.actions].sort((a, b) => b.at - a.at), ...(error ? { error } : {}) };
 }
 
 // ── per game: what the contract recorded for the account ──
@@ -319,11 +352,11 @@ export function pointsOf(games: GameEntry[], streak: number) {
 export async function buildPassport(account: string, opts: { nearblocksKey?: string; now?: number } = {}): Promise<Passport> {
   if (!isAccountId(account)) throw new Error('not a NEAR account id');
   const now = opts.now ?? Date.now();
-  const [activityRes, ...reads] = await Promise.allSettled([
-    remember(`activity|${account}`, 90_000, () => readActivity(account, opts.nearblocksKey)),
-    ...GAMES.map((g) => READERS[g.slug as Slug].read(account)),
+  const [act, ...reads] = await Promise.all([
+    readActivity(account, opts.nearblocksKey),
+    ...GAMES.map((g) => READERS[g.slug as Slug].read(account).then((value) => ({ status: 'fulfilled' as const, value }), (reason) => ({ status: 'rejected' as const, reason }))),
   ]);
-  const activity = activityRes.status === 'fulfilled' ? (activityRes.value as Action[]) : [];
+  const activity = act.actions;
   const games: GameEntry[] = GAMES.map((g, i) => {
     const slug = g.slug as Slug;
     const res = reads[i] as PromiseSettledResult<Read>;
@@ -353,7 +386,7 @@ export async function buildPassport(account: string, opts: { nearblocksKey?: str
     streak,
     points: pointsOf(games, streak.current),
     activity: activity.slice(0, 30),
-    ...(activityRes.status === 'rejected' ? { activityError: String((activityRes.reason as Error)?.message ?? activityRes.reason).slice(0, 160) } : {}),
+    ...(act.error ? { activityError: act.error.slice(0, 160) } : {}),
     updatedAt: now,
   };
 }
