@@ -2,6 +2,7 @@ import { Cabinet } from './components/Cabinet';
 import { ChangeMachine } from './components/ChangeMachine';
 import { Footer } from './components/Footer';
 import { GameScreen } from './components/GameScreen';
+import { PassportLink } from './components/PassportLink';
 import { Sign } from './components/Sign';
 import { Ticker } from './components/Ticker';
 import { TrackBar } from './components/TrackBar';
@@ -20,6 +21,7 @@ export function App() {
     <>
       {/* inert while a game is on screen: the arcade behind it can't take focus */}
       <div className="wrap" inert={!!screen.game}>
+        <PassportLink />
         <Sign />
         <Ticker lines={ticker.lines} failed={ticker.failed} />
         <TrackBar track={track} onPick={pick} />
