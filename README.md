@@ -263,6 +263,10 @@ The script needs no keys and no install beyond Node. It prints a summary, e.g. `
 
 Its path `/<slug>` works on Vercel and Azure with no config change (any slug but `thesis`). To count its agents on /thesis, add them to `AGENT_ROSTER` and its contract to `CONTRACTS` in `src/thesis.ts`. For a new subdomain, add the game to the lists in `domains.sh`.
 
+## AI assistance
+
+The arcade page and all nine games (code, tests, contracts and docs) were written with an AI coding assistant (Claude Code), directed, reviewed and played on testnet by the author. In the games themselves, AI only plays or speaks: contracts and rules engines decide every outcome.
+
 ## Other submission
 
 The same author also submitted **Signalfire** ([github.com/lopeselio/signalfire](https://github.com/lopeselio/signalfire)), a separate, independent project: attention tokens whose trading fees can only fund a startup's marketing, with sealed-bid creator campaigns, a Sputnik DAO treasury and a spend policy on NEAR testnet. It shares no contract, rules or server with any game here.
