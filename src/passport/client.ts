@@ -32,10 +32,11 @@ const ROUTES: [Via, (a: string) => Promise<Passport>][] = [
 /** Routes that turned out to have no API behind them (asked once per page load). */
 const missing = new Set<number>();
 
-export async function loadPassport(account: string): Promise<{ passport: Passport; via: Via }> {
+/** `apiOnly`: skip the in-browser read (for the arcade header, which shouldn't cost the floor dozens of extra reads). */
+export async function loadPassport(account: string, { apiOnly = false } = {}): Promise<{ passport: Passport; via: Via }> {
   let last: unknown;
   for (let i = 0; i < ROUTES.length; i++) {
-    if (missing.has(i)) continue;
+    if (missing.has(i) || (apiOnly && ROUTES[i][0] === 'your browser')) continue;
     try {
       return { passport: await ROUTES[i][1](account), via: ROUTES[i][0] };
     } catch (e) {
