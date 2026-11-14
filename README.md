@@ -40,7 +40,8 @@ These nine games flip that. Players start as guests with no wallet; the chain wo
 4. Press a **track chip** under the ticker (e.g. **Privacy**): the cabinets that prove it light up, each with a note naming the contract method to look at, and the rest dim. The address bar shows `?track=privacy`; press the chip again to clear it.
 5. Open **https://arcade.lopeselio.online/thesis**: the numbers first show a dimmed snapshot, then turn bright as live reads arrive (about 10–30 s on public RPC). Open **Every agent account and what its keys may do**: each one has only function-call keys.
 6. Each game's README has its own do-X-see-Y steps and a verify command (`pnpm verify …` in most; Parkwright's is `/api/parks/<id>/verify`) that re-checks a finished match against its contract. [Check every track yourself](#check-every-track-yourself-no-keys) has one ready-to-paste command per track, with real match ids and the output to expect.
-7. Open **https://arcade.lopeselio.online/no-such-game**: an *Out of order* page says there's no cabinet there and links all nine games, the floor and /thesis.
+7. Open **https://arcade.lopeselio.online/passport?account=eliocodes.testnet** (or press **Passport** above the sign): see that account's [Arcade Passport](#arcade-passport): its day streak, points and which of the nine cabinets it has played.
+8. Open **https://arcade.lopeselio.online/no-such-game**: an *Out of order* page says there's no cabinet there and links all nine games, the floor and /thesis.
 
 ## Tracks: where to see each one
 
@@ -187,6 +188,33 @@ The other three games have the same kind of check: `pnpm verify em5cqa --host ht
 5. **(2 min) Check it yourself.** Run the `curl` commands at the top of [TRACKS.md](TRACKS.md) (agent keys, EMBER supply), or `node scripts/thesis-data.mjs` in this repo. Open two transactions from TRACKS.md: the [Intents barter](https://testnet.nearblocks.io/txns/J7xBcKD5mszMkgEQo8tViw9SAGdWAsezr7HkJxP2ZH4x) and the [Chain Signatures deed certificate](https://testnet.nearblocks.io/txns/GReHCPKNjxnFmNiL9z51DZ3Zn9tdehRrCyd3VrPoaUVf).
 6. **(1 min) One verify.** Run any command from [Check every track yourself](#check-every-track-yourself-no-keys), e.g. Fogwater's `pnpm verify f1859e8a4aa4 https://fogwater.lopeselio.online` (no keys).
 
+## Arcade Passport
+
+One account's progress across all nine games, at **/passport**. Read-only: it never asks a wallet to sign, writes nothing onchain, and changes no game.
+
+1. Open **https://arcade.lopeselio.online/passport** and press **Connect NEAR wallet** (NEAR Connect; only your account id is read), or type any testnet account under **view any account** and press **View**. The address bar becomes `/passport?account=<id>`, a link you can share.
+2. You see a 🔥 **day streak** with the last seven days (a flame on each day with play; "Play today to keep your streak" when today is empty), an LED **points** total with its breakdown, **nine cabinet tiles** (lit when the account has played, with that game's stats from its contract and a Play link), and **Today**: the account's onchain game actions with NearBlocks links.
+3. Play any game signed in, then come back: the page re-reads every 20 s while the tab is visible and the points count up.
+4. The JSON behind it: `curl https://arcade.lopeselio.online/api/passport/eliocodes.testnet` (`{account, games[{id, name, url, played, lastPlayed, days, stats, wins?, dates, error?}], days, streak{current, best, today}, points{total, breakdown}, activity, updatedAt}`).
+
+**Points** (a display score only: not a token, not stored anywhere, not redeemable): +10 per game-day (each game on each UTC day with a dated action; a game with a record but no dated action counts once), +25 per win in games whose contracts record wins, +5 × current streak, +100 once all nine are played. A streak is still alive today if you played yesterday (days are UTC).
+
+**Data sources**
+
+| Game | Stats (contract views) | Activity dates |
+| --- | --- | --- |
+| Sushi Sabotage | `chef_of`, `get_token` (shifts, wins, best), `get_chef` (level) on sushi-sabotage.testnet | receipts to the contract, chef NFT mints, the chef's `last_claim_day` |
+| Bazaar of Liars | `player_state` (coins, goods), `cred_of` (XP, streak) on v3.bazaar-liars.testnet | the cred streak's days only: haggles are signed by the game server, so they leave no receipt of the player's |
+| Realm Ledger | `GET realm.lopeselio.online/api/campaigns?player=` (campaigns, wins as realm 0), server-side only | receipts (a wallet ruler seals its own orders), campaign start times |
+| Parkwright | `list_parks` (your parks, CR earned, settlements), `ft_balance_of` on park.parkwright.testnet | receipts, park creation times |
+| Fogwater, Inside Job, Kraterra | `stats_of` on each contract (+ `nft_supply_for_owner` for Kraterra packs) | receipts, munition-pack mints |
+| Emberfall | `warden_of`, `get_warden` (record, purse) | receipts, Warden NFT and EMBER mints |
+| Clawtide | `get_record`, `ft_balance_of` (PEARL) | receipts, PEARL minted when a sandbar settles |
+
+Dates come from the NearBlocks testnet API (v3, no key): `/accounts/<id>/receipts` (receipts whose predecessor is the account and whose receiver is a game contract, so a relayed NEP-366 move counts for the player, not the relayer), plus `/ft-txns` and `/nft-txns` for game tokens minted to it. **Not counted:** guest play, moves a game server or referee signs for you (except the days a contract stores itself), AI agents' actions, and receipts beyond the newest 300. NearBlocks' free tier allows a few calls a minute, so calls are spaced, receipts are re-read every 90 s and token events every 10 min, and the last good answer is kept; set `NEARBLOCKS_API_KEY` in the Vercel project for more headroom.
+
+Where it runs: `api/passport/[account].ts` (a Vercel function, cached 60 s per account) builds the passport with `src/passport/core.ts`. On the Azure mirror or under `pnpm dev` there's no `/api`, so the page asks the Vercel URL, and failing that runs the same code in the browser (there, Realm Ledger's campaign list can't be read cross-origin and its tile says so).
+
 ## Run it
 
 A small React + TypeScript app built with Vite (Node 22+, pnpm):
@@ -203,7 +231,7 @@ The script needs no keys and no install beyond Node. It prints a summary, e.g. `
 
 ## Deploy
 
-- **Vercel** (project `near-arcade`, live at https://arcade.lopeselio.online): `vercel deploy --prod --yes --scope lopeselios-projects`. `vercel.json` builds with Vite into `dist/`, sends every path except the built files to the app (`/sushi`, `/fogwater`, … open a game; an unknown path shows a not-found page with every game's link), caches the hashed files in `/assets` forever and revalidates everything else.
+- **Vercel** (project `near-arcade`, live at https://arcade.lopeselio.online): `vercel deploy --prod --yes --scope lopeselios-projects`. `vercel.json` builds with Vite into `dist/`, serves `api/passport/[account].ts` as a function, sends every path except the built files and `/api` to the app (`/sushi`, `/fogwater`, … open a game; an unknown path shows a not-found page with every game's link), caches the hashed files in `/assets` forever and revalidates everything else.
 - **Azure Storage static website** (mirror): `./deploy.sh` builds and uploads `dist/` (hashed assets immutable, `index.html` no-cache; the 404 page is the app, so deep links work).
 - `./domains.sh records|check|bind` puts the arcade and each game on its lopeselio.online subdomain.
 
@@ -220,8 +248,9 @@ The script needs no keys and no install beyond Node. It prints a summary, e.g. `
 | `src/loaders.ts` | one loader per game: its high-score board, three stats and ticker lines |
 | `src/hooks.ts` | runs the loaders and the balance reads |
 | `src/useGameScreen.ts` | the game screen at `/<slug>`: history, Back, Escape, focus |
-| `src/main.tsx` | which page a path gets: the floor, a game over it, /thesis, or the not-found page |
-| `src/components/` | Sign, Ticker, TrackBar, Cabinet, LivePanel, CoinBox, ChangeMachine, Footer, GameScreen, Thesis (the /thesis page), NotFound |
+| `src/main.tsx` | which page a path gets: the floor, a game over it, /thesis, /passport, or the not-found page |
+| `src/passport/core.ts`, `src/passport/client.ts`, `api/passport/[account].ts` | the Arcade Passport: per-game reads, NearBlocks dates, streak and points; the page's fetch/poll and wallet; the Vercel function |
+| `src/components/` | Sign, Ticker, TrackBar, Cabinet, LivePanel, CoinBox, ChangeMachine, Footer, GameScreen, Thesis (the /thesis page), Passport (/passport) and PassportLink, NotFound |
 | `src/styles.css` | the whole look |
 | `games/` | the nine game repos as git submodules, each pinned to a commit whose code is what the hosted game runs (later commits may be docs only; `git submodule update --remote` moves them to each repo's latest `main`); the arcade's build doesn't read them |
 
