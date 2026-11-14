@@ -40,6 +40,7 @@ export interface GameEntry {
   /** Where this game's activity dates come from, in words. */
   dates: string;
   error?: string;
+  note?: string;
 }
 
 export interface PointsLine {
@@ -189,6 +190,8 @@ interface Read {
   wins?: number;
   /** Days the contract itself stores for the account. */
   days?: Day[];
+  /** A known gap in what could be read, shown dimmed (not an error). */
+  note?: string;
 }
 
 const DATES = { receipts: 'receipts you sent to the contract, relayed ones included' };
@@ -230,7 +233,8 @@ const READERS: Record<Slug, { dates: string; read: (a: string) => Promise<Read> 
   realm: {
     dates: `${DATES.receipts} (a wallet ruler seals its own orders), and campaign start times from the Realm Ledger server`,
     async read(a): Promise<Read> {
-      if (!isServer) throw new Error('campaign list is only readable from the arcade server; dates still come from your receipts');
+      // the Realm Ledger server only answers its own site cross-origin, so a browser read can't see campaigns
+      if (!isServer) return { played: false, stats: {}, note: 'Campaign wins are read by the arcade server; this copy is reading from your browser, so only your receipts count here.' };
       const r = await fetch(`https://realm.lopeselio.online/api/campaigns?player=${encodeURIComponent(a)}`, { signal: AbortSignal.timeout(8000) });
       if (!r.ok) throw new Error(`Realm Ledger server answered HTTP ${r.status}`);
       const list: { createdAt: number; phase: string; winner: number | null }[] = await r.json();
@@ -374,6 +378,7 @@ export async function buildPassport(account: string, opts: { nearblocksKey?: str
       stats: read?.stats ?? {},
       ...(read?.wins !== undefined ? { wins: read.wins } : {}),
       dates: READERS[slug].dates,
+      ...(read?.note ? { note: read.note } : {}),
       ...(res.status === 'rejected' ? { error: String((res.reason as Error)?.message ?? res.reason).slice(0, 160) } : {}),
     };
   });

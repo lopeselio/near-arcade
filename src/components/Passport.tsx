@@ -174,7 +174,7 @@ function Board({ p }: { p: Data }) {
         <h2 id="pp-feed" className="pp-h2">
           Today <small>{todays.length ? `${todays.length} onchain action${todays.length === 1 ? '' : 's'}` : 'nothing yet'}</small>
         </h2>
-        {p.activityError && <p className="pp-warn">Activity dates are missing right now ({p.activityError}). Stats still come from the contracts; the streak may read low until the next refresh.</p>}
+        {p.activityError && <p className="pp-warn">Some activity dates are missing right now ({p.activityError}). Stats still come from the contracts; the streak may read low until the next refresh.</p>}
         {p.activity.length ? (
           <ol className="pp-acts">
             {(todays.length ? todays : p.activity).slice(0, 12).map((a, i) => (
@@ -314,6 +314,7 @@ function Tile({ g, today }: { g: GameEntry; today: string }) {
         )}
       </dl>
       {g.error && <p className="pp-cab-err">Couldn’t read: {g.error}</p>}
+      {g.note && <p className="pp-cab-note">{g.note}</p>}
       <details className="pp-dates">
         <summary>Where the dates come from</summary>
         <p>{g.dates}</p>
