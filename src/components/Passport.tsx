@@ -58,7 +58,8 @@ export function Passport() {
     setConnecting(true);
     setConnectError(null);
     try {
-      show(await connectWallet(), true);
+      const id = await connectWallet();
+      if (id) show(id, true);
     } catch (e) {
       setConnectError((e as Error)?.message || 'the wallet closed without sharing an account');
     } finally {

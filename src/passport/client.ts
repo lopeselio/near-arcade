@@ -106,14 +106,22 @@ let connector: Promise<NearConnector> | null = null;
 const picker = () =>
   (connector ??= import('@hot-labs/near-connect').then(({ NearConnector }) => new NearConnector({ network: 'testnet', features: { testnet: true } })));
 
-export async function connectWallet(): Promise<string> {
+/** Resolves to null when the player closes the wallet picker without choosing. */
+export async function connectWallet(): Promise<string | null> {
   const c = await picker();
   const existing = await c.getConnectedWallet().catch(() => null);
-  const wallet = existing?.wallet ?? (await c.connect());
+  const wallet = existing?.wallet ?? (await c.connect().catch(ignoreDismissal));
+  if (!wallet) return null;
   const [acc] = await wallet.getAccounts({ network: 'testnet' });
   if (!acc) throw new Error('the wallet did not share an account');
   return acc.accountId;
 }
+
+// NEAR Connect rejects with this message when its picker is closed.
+const ignoreDismissal = (e: unknown) => {
+  if ((e as Error)?.message === 'User rejected') return null;
+  throw e;
+};
 
 export async function disconnectWallet() {
   if (!connector) return;
